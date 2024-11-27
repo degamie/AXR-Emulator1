@@ -2,10 +2,15 @@ package com.example.axremulator2;
 
 import android.annotation.SuppressLint;
 
+import androidx.activity.result.contract.ActivityResultContract;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.app.DownloadManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.hardware.camera2.CameraManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,6 +39,29 @@ public class MainAXRActivity extends AppCompatActivity {
     boolean mUserRequestedInstall = true;
     boolean mSession=false;
     boolean mRequestedInstall=false;
+    boolean isGranted=false;
+//    private Object manifest;
+
+    //Enabling Camera Permissions to Record the Live Camera Outside Scene Activity
+    private String CameraPermission(ActivityResultContract.RequestPermission){
+
+        if(isGranted){
+
+        }else {
+            Toast.makeText(this,"Go to Setttings Feature to enable this feature");
+            Toast.LENGTH_LONG;
+//
+            show();
+        }
+        return null;
+    }
+
+    public void handleCameraPermission(){
+        if(ContextCompat.checkSelfPermission()){
+            this.Manifest.Permission.camera== PackageManager.PERMISSION_GRANTED;
+        }
+    }
+
     public String enableARCoreAppButton(){
         Boolean enablearapp=false;
         ArCoreApk.getInstance().checkAvailabilityAsync(this, availibility-> {
