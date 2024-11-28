@@ -7,6 +7,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -20,6 +21,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowInsets;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.axremulator2.databinding.ActivityMainAxractivityBinding;
@@ -29,6 +31,7 @@ import com.google.ar.core.Session;
 import com.google.ar.core.exceptions.UnavailableUserDeclinedInstallationException;
 
 import java.io.File;
+import java.lang.reflect.Modifier;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -40,6 +43,8 @@ public class MainAXRActivity extends AppCompatActivity {
     boolean mSession=false;
     boolean mRequestedInstall=false;
     boolean isGranted=false;
+    String Display= show();
+    private Activity CameraPermissionHelper;
 //    private Object manifest;
 
     //Enabling Camera Permissions to Record the Live Camera Outside Scene Activity
@@ -50,14 +55,26 @@ public class MainAXRActivity extends AppCompatActivity {
         }else {
             Toast.makeText(this,"Go to Setttings Feature to enable this feature");
             Toast.LENGTH_LONG;
-//
-            show();
+       
         }
-        return null;
+        return Display;
+    }
+//        return null;
+ 
+    private void StartDefaultCamera(){}
+
+    //Intent.ACTION_
+
+    public void onCreate(){
+        mArButton=handleCameraPermission();
+        Modifier.align(Alignment.ButtonCenter);
+        String Text="Take Video";
+        //Intent.ACTION_
+
     }
 
     public void handleCameraPermission(){
-        if(ContextCompat.checkSelfPermission()){
+        if(ContextCompat.checkSelfPermission(Manifest.permission.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION)){
             this.Manifest.Permission.camera== PackageManager.PERMISSION_GRANTED;
         }
     }
@@ -80,16 +97,12 @@ public class MainAXRActivity extends AppCompatActivity {
         RecordingConfig recordingConfig=new RecordingConfig(session)
                 .setMp4DatasetUri(destination)
                 .setAutoStopOnPause(true);
-
-    try{
-        session.startRecording(recordingConfig);
-    }
-    catch (RecordingConfig e){
-        Log.e("Unable To Start",e);
-    }
+        try{session.startRecording(recordingConfig);}
+    catch (RecordingConfig e){Log.e("Unable To Start",e);}
     session.resume();
     }
-        @Override
+    
+    @Override
     protected void onResume(){
         super.onResume();
         if(!CameraPermissionHelper.hasCameraPermssion(this)){CameraPermssion.requestCameraPermission(this);return;}
@@ -104,7 +117,6 @@ public class MainAXRActivity extends AppCompatActivity {
                         return;
                 }
             }
-
         }
         catch(UnavailableUserDeclinedInstallationException e){
             Toast.makeText(this,"TODO:handleException"+e.LENGTH_LONG).show();
@@ -114,7 +126,7 @@ public class MainAXRActivity extends AppCompatActivity {
     }
     @Override
     public void onRequestPermissionResult(int requestCode,String permissions,int[] results){
-        super.onRequestPermissionResult(requestCode,permissions,results);
+        super.onRequestPermissionsResult(requestCode,permissions,results);
         if(!CameraPermissionHelper.hasCameraPermission(this)){
             Toast.makeText(this,"Camera Permission to run this App", Toast.LENGTH_LONG)
                     .show();
