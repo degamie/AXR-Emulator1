@@ -1,8 +1,11 @@
 package com.example.axremulator2;
 
+import static java.lang.reflect.Modifier.*;
+
 import android.annotation.SuppressLint;
 
 import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -18,6 +21,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowInsets;
@@ -38,17 +42,19 @@ import java.lang.reflect.Modifier;
  * status bar and navigation/system bar) with user interaction.
  */
 public class MainAXRActivity extends AppCompatActivity {
+    Show=show();
     Object mArButton=new Object();
     boolean mUserRequestedInstall = true;
     boolean mSession=false;
     boolean mRequestedInstall=false;
     boolean isGranted=false;
-    String Display= show();
-    private Activity CameraPermissionHelper;
+    Display
+
+    public Context  CameraPermissionHelper;
 //    private Object manifest;
 
     //Enabling Camera Permissions to Record the Live Camera Outside Scene Activity
-    private String CameraPermission(ActivityResultContract.RequestPermission){
+    private String CameraPermission(ActivityResultContracts.RequestPermission){
 
         if(isGranted){
 
