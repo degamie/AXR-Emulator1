@@ -28,6 +28,7 @@ import android.view.WindowInsets;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.axremulator2.Common.CameraPermissionHelper;
 import com.example.axremulator2.databinding.ActivityMainAxractivityBinding;
 import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.RecordingConfig;
@@ -42,18 +43,18 @@ import java.lang.reflect.Modifier;
  * status bar and navigation/system bar) with user interaction.
  */
 public class MainAXRActivity extends AppCompatActivity {
-    Show=show();
+    public CameraPermissionHelper cameraPermissionHelper;
     Object mArButton=new Object();
     boolean mUserRequestedInstall = true;
     boolean mSession=false;
     boolean mRequestedInstall=false;
     boolean isGranted=false;
-    Display
+//    private Object Manifest;
 
-    public Context  CameraPermissionHelper;
-//    private Object manifest;
+    show();
 
     //Enabling Camera Permissions to Record the Live Camera Outside Scene Activity
+    @Override
     private String CameraPermission(ActivityResultContracts.RequestPermission){
 
         if(isGranted){
@@ -66,13 +67,46 @@ public class MainAXRActivity extends AppCompatActivity {
         return Display;
     }
 //        return null;
- 
+    @Override
     private void StartDefaultCamera(){}
+    protected void onResume(){
+        super.onResume();
+        if(!cameraPermissionHelper.hasCameraPermission(this)){cameraPermissionHelper.requestCameraPermisssion(this);return;}
+        try{
+            if(mSession==null){
+                switch(ArCoreApk.getInstance().requestInstall(this,mUserRequestedInstall)){
+                    case INSTALLED:
+                        mSession=new mSession();
+                        break;
+                    case INSTALL_REQUESTED:
+                        mRequestedInstall=false;
+                        return;
+                }
+            }
+        }
+        catch(UnavailableUserDeclinedInstallationException e){
+            Toast.makeText(this,
+                    "TODO:handleException"+e.LENGTH_LONG).show();
+            return;
+        }
+        catch (UnavailableUserDeclinedInstallationException e){return;}
+    }
+    @Override
+    public void onRequestPermissionResult(int requestCode,String permissions,int[] results){
+        super.onRequestPermissionsResult(requestCode,permissions,results);
+        if(!cameraPermissionHelper.hasCameraPermission(this)){
+            Toast.makeText(this,"Camera Permission to run this App", Toast.LENGTH_LONG)
+                    .show();
+            if(!cameraPermissionHelper.ShouldShowRequestCameraPermissionRationale(this)){
+                cameraPermissionHelper.launchCameraPermissionSettings(this);
+            }
+            finish();
+        }
 
     //Intent.ACTION_
 
     public void onCreate(){
-        mArButton=handleCameraPermission();
+        mArButton=CameraPermissionHelper.handleCameraPermission();
         Modifier.align(Alignment.ButtonCenter);
         String Text="Take Video";
         //Intent.ACTION_
@@ -90,8 +124,8 @@ public class MainAXRActivity extends AppCompatActivity {
         ArCoreApk.getInstance().checkAvailabilityAsync(this, availibility-> {
             if (availibility) {enablearapp=enableARCoreAppButton(); }
             else { enablearapp=false;}
-        return enablearapp;
         }
+        return enablearapp;
     }
 
     //Ar Core Camera's Real world Activity Remain to start
@@ -108,40 +142,8 @@ public class MainAXRActivity extends AppCompatActivity {
     session.resume();
     }
     
-    @Override
-    protected void onResume(){
-        super.onResume();
-        if(!CameraPermissionHelper.hasCameraPermssion(this)){CameraPermssion.requestCameraPermission(this);return;}
-        try{
-            if(mSession==null){
-                switch(ArCoreApk.getInstance().requestInstall(this,mUserRequestedInstall)){
-                    case INSTALLED:
-                        mSession=new mSession();
-                        break;
-                    case INSTALL_REQUESTED:
-                        mRequestedInstall=false;
-                        return;
-                }
-            }
-        }
-        catch(UnavailableUserDeclinedInstallationException e){
-            Toast.makeText(this,"TODO:handleException"+e.LENGTH_LONG).show();
-            return;
-        }
-        catch (UnavailableUserDeclinedInstallationException e){return;}
-    }
-    @Override
-    public void onRequestPermissionResult(int requestCode,String permissions,int[] results){
-        super.onRequestPermissionsResult(requestCode,permissions,results);
-        if(!CameraPermissionHelper.hasCameraPermission(this)){
-            Toast.makeText(this,"Camera Permission to run this App", Toast.LENGTH_LONG)
-                    .show();
-            if(!CameraPermissionHelper.shouldShowRequestPermissionRationale(this)){
-                CameraPermissionHelper.launchPermissionSettings(this);
-            }
-            finish();
-        }
-    }
+
+
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
