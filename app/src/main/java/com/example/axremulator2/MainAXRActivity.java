@@ -1,34 +1,28 @@
 package com.example.axremulator2;
 
-import static java.lang.reflect.Modifier.*;
-
 import android.annotation.SuppressLint;
 
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import android.app.Activity;
-import android.app.DownloadManager;
-import android.content.Context;
 import android.content.pm.PackageManager;
-import android.hardware.camera2.CameraManager;
 import android.net.Uri;
+import android.opengl.GLSurfaceView;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowInsets;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.axremulator2.Common.CameraPermissionHelper;
+import com.example.axremulator2.Common.PlaneRenderer;
+import com.example.axremulator2.Common.SampleRenderer;
+import com.example.axremulator2.Common.TapHelper;
 import com.example.axremulator2.databinding.ActivityMainAxractivityBinding;
 import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.RecordingConfig;
@@ -42,7 +36,41 @@ import java.lang.reflect.Modifier;
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class MainAXRActivity extends AppCompatActivity {
+public class MainAXRActivity extends AppCompatActivity implements SampleRenderer.Renderer {
+
+    //New AXR Implementation
+    //Testing AR COre Camera INDEV
+    public static final String SEARCHING_PLANE_MESSAGE="Searching For Ground Surface";
+    public static final String WAITING_FOR_TAP_MESSAGE="Tap on Surface to place an Object on Surface";
+
+    public static final Float[] SphericalHarmonicFactors={
+            .29f;
+    .31f;
+    .45f;
+    .661f;
+    .661f;
+    .661f;
+    .661f;
+    .661f;
+    }
+    public static float Z_NEAR=.15f;
+    public static float Z_FAR=150f;
+
+
+    public   static int CUBEMMAP_RESOLUTION=17;
+    public   static int CUBEMMAP_NUMBER_OF_IMPORTANT_SAMPLES=32;
+
+    public GLSurfaceView surfaceView;
+    public Session session;
+    public TapHelper tapHelper;
+    public PlaneRenderer planerender;
+
+
+
+
+
+
+
     public CameraPermissionHelper cameraPermissionHelper;
     Object mArButton=new Object();
     boolean mUserRequestedInstall = true;
@@ -309,6 +337,7 @@ public class MainAXRActivity extends AppCompatActivity {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
+}
 }
 //                mArButton.setAvailability(View.VISIBLE);
 //                mArButton.set
