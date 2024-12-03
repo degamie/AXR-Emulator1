@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.pm.PackageManager;
+import android.graphics.Shader;
 import android.net.Uri;
 import android.opengl.GLSurfaceView;
 import android.os.Build;
@@ -25,12 +26,14 @@ import com.example.axremulator2.Common.SampleRenderer;
 import com.example.axremulator2.Common.TapHelper;
 import com.example.axremulator2.databinding.ActivityMainAxractivityBinding;
 import com.google.ar.core.ArCoreApk;
+import com.google.ar.core.Mesh;
 import com.google.ar.core.RecordingConfig;
 import com.google.ar.core.Session;
 import com.google.ar.core.exceptions.UnavailableUserDeclinedInstallationException;
 
 import java.io.File;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -77,6 +80,24 @@ public class MainAXRActivity extends AppCompatActivity implements SampleRenderer
     boolean mSession=false;
     boolean mRequestedInstall=false;
     boolean isGranted=false;
+
+public final Texture dfgTexture;
+public final specularCubemapFilter CubemapFilter;
+public final Mesh VirtualMesh ;
+public final Shader ShadingCompiler;
+public final Texture virutalTexturealBedo;
+public final Texture ObjAlbedoPlacemntTexure;
+public final List<WrappedAnchor> wrappedAnchorList=new ArrayList<>();
+public final float[] modelMatrix=new float[16];
+public final float[] viewMatrix=new float[16];
+public final float[] ProjectedMatrix=new float[16];
+public final float[] modelViewMatrix=new float[16];
+public final float[] modelViewMatrixProjection=new float[16];
+public final float[] ViewMatrixInverse=new float[16];
+public final float[] ViewLightDirectionMatrix=new float[4];
+public final float[] worldDirectionLight={0,0,0};
+
+
 //    private Object Manifest;
 
     show();

@@ -7,5 +7,5 @@ public class SampleRenderer {
     public AssetManager assetManager;
     public static final int ViePortHeight=1;
     public static final int ViePortWidth=1;
-    public void Renderer{}//To ibe IMpemented
+    public void Renderer(){}//To ibe IMpemented
 }
