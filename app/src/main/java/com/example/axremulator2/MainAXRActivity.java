@@ -1,5 +1,6 @@
 package com.example.axremulator2;
 
+import android.os.Bundle;
 import android.annotation.SuppressLint;
 
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -20,10 +21,10 @@ import android.view.View;
 import android.view.WindowInsets;
 import android.widget.Toast;
 
-import com.example.axremulator2.Common.CameraPermissionHelper;
-import com.example.axremulator2.Common.PlaneRenderer;
-import com.example.axremulator2.Common.SampleRenderer;
-import com.example.axremulator2.Common.TapHelper;
+import com.example.axremulator2.Common.Helpers.CameraPermissionHelper;
+import com.example.axremulator2.Common.Helpers.PlaneRenderer;
+import com.example.axremulator2.Common.Helpers.SampleRenderer;
+import com.example.axremulator2.Common.Helpers.TapHelper;
 import com.example.axremulator2.databinding.ActivityMainAxractivityBinding;
 import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.Mesh;
@@ -32,8 +33,8 @@ import com.google.ar.core.Session;
 import com.google.ar.core.exceptions.UnavailableUserDeclinedInstallationException;
 
 import java.io.File;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import com.example.axremulator2.Common.Helpers.DisplayRotationHelper;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -67,6 +68,7 @@ public class MainAXRActivity extends AppCompatActivity implements SampleRenderer
     public Session session;
     public TapHelper tapHelper;
     public PlaneRenderer planerender;
+    public DisplayRotationHelper displayRotationHelper;
 
 
 
@@ -96,6 +98,7 @@ public final float[] modelViewMatrixProjection=new float[16];
 public final float[] ViewMatrixInverse=new float[16];
 public final float[] ViewLightDirectionMatrix=new float[4];
 public final float[] worldDirectionLight={0,0,0};
+
 
 
 //    private Object Manifest;
@@ -154,13 +157,20 @@ public final float[] worldDirectionLight={0,0,0};
 
     //Intent.ACTION_
 
-    public void onCreate(){
-        mArButton=CameraPermissionHelper.handleCameraPermission();
-        Modifier.align(Alignment.ButtonCenter);
-        String Text="Take Video";
+        @Override
+        public void onCreate(Bundle savedInstancestate){
+            super.onCreate(savedInstancestate);
+            setContentView(R.layout.activity_main_axractivity);
+            surfaceView=findById(R.id.surfaceView);
+            displayRotationHelper=new DisplayRotionHelper;
+            TapHelper tapHelper=new TapHelper();
+        }
+//        mArButton=CameraPermissionHelper.handleCameraPermission();
+//        Modifier.align(Alignment.ButtonCenter);
+//        String Text="Take Video";
         //Intent.ACTION_
 
-    }
+
 
     public void handleCameraPermission(){
         if(ContextCompat.checkSelfPermission(Manifest.permission.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION)){

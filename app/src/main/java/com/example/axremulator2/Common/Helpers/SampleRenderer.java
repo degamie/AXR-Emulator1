@@ -1,4 +1,4 @@
-package com.example.axremulator2.Common;
+package com.example.axremulator2.Common.Helpers;
 
 import android.content.res.AssetManager;
 

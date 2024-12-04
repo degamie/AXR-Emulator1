@@ -1,11 +1,8 @@
-package com.example.axremulator2.Common;
+package com.example.axremulator2.Common.Helpers;
 
 import android.content.Context;
-import android.gesture.Gesture;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-
-import androidx.compose.animation.core.Motion;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -27,5 +24,8 @@ public class TapHelper {
             }
         }
         );
+    }
+    public MotionEvent poll(){
+        return queuedSingleTaps.poll();
     }
 }
