@@ -165,7 +165,7 @@ public final float[] worldDirectionLight={0,0,0};
             displayRotationHelper=new DisplayRotionHelper;
             TapHelper tapHelper=new TapHelper();
         }
-//        mArButton=CameraPermissionHelper.handleCameraPermission();
+//        mArButton=CameraPerissionHelper.handleCameraPermission();
 //        Modifier.align(Alignment.ButtonCenter);
 //        String Text="Take Video";
         //Intent.ACTION_
