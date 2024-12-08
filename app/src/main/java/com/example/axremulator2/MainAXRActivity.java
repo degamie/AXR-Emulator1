@@ -42,13 +42,12 @@ import com.example.axremulator2.Common.Helpers.DisplayRotationHelper;
  */
 public class MainAXRActivity extends AppCompatActivity implements SampleRenderer.Renderer {
 
+
     //New AXR Implementation
     //Testing AR COre Camera INDEV
     public static final String SEARCHING_PLANE_MESSAGE="Searching For Ground Surface";
     public static final String WAITING_FOR_TAP_MESSAGE="Tap on Surface to place an Object on Surface";
 
-    public static final Float[] SphericalHarmonicFactors={
-            .29f;
     .31f;
     .45f;
     .661f;
@@ -114,7 +113,7 @@ public final float[] worldDirectionLight={0,0,0};
         }else {
             Toast.makeText(this,"Go to Setttings Feature to enable this feature");
             Toast.LENGTH_LONG;
-       
+
         }
         return Display;
     }
@@ -200,7 +199,7 @@ public final float[] worldDirectionLight={0,0,0};
     catch (RecordingConfig e){Log.e("Unable To Start",e);}
     session.resume();
     }
-    
+
 
 
     /**
