@@ -1,5 +1,7 @@
 package com.example.axremulator2;
 
+import android.graphics.Camera;
+import android.hardware.camera2.CameraManager;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 
@@ -19,6 +21,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowInsets;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.axremulator2.Common.Helpers.CameraPermissionHelper;
@@ -44,6 +47,12 @@ public class MainAXRActivity extends AppCompatActivity implements SampleRenderer
 
 
     //New AXR Implementation
+    //TorchLight Implementation
+    public Switch flashableLightSwitch;
+    public CameraManager cameraManager;
+
+
+
     //Testing AR COre Camera INDEV
     public static final String SEARCHING_PLANE_MESSAGE="Searching For Ground Surface";
     public static final String WAITING_FOR_TAP_MESSAGE="Tap on Surface to place an Object on Surface";
@@ -156,9 +165,25 @@ public final float[] worldDirectionLight={0,0,0};
 
     //Intent.ACTION_
 
-        @Override
-        public void onCreate(Bundle savedInstancestate){
+//        @Override
+        public void onCreate(Bundle savedInstancestate,Switch flashableLightSwitch){
             super.onCreate(savedInstancestate);
+            //Torchlight Implementation
+            Switch flashableLightSwitch;
+            flashableLightSwitch=findViewById(R.id.SwitchFlashLight);
+            CameraManager cameraManager=cameraManager.openCamera(cameraPermissionHelper.this);
+            if(getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
+                if(getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
+                }
+            }
+            else {
+                Toast.makeText(MainActivity.this,"Device without Camera",Toast.LENGTH_SHORT);
+            }
+
+
+//            CameraManager cameraManager=(CameraManager)
+
+
             setContentView(R.layout.activity_main_axractivity);
             surfaceView=findById(R.id.surfaceView);
             displayRotationHelper=new DisplayRotionHelper;
