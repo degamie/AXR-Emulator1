@@ -1,5 +1,7 @@
 package com.example.axremulator2.Common.Helpers;
 
+import static android.text.method.TextKeyListener.clear;
+
 import android.content.res.AssetManager;
 import android.opengl.GLES30;
 import android.opengl.GLSurfaceView;
@@ -12,6 +14,8 @@ public class SampleRenderer {
     public AssetManager assetManager;
     public static final int ViePortHeight=1;
     public static final int ViePortWidth=1;
+    public   GLES30 gles30;
+    Renderer renderer;
     public void SampleRenderer(GLSurfaceView glSurfaceView,Renderer renderer,AssetManager assetManager){
         this.assetManager=assetManager;
         glSurfaceView.setPreserveEGLContextOnPause(true);
@@ -26,6 +30,13 @@ public class SampleRenderer {
                         renderer.onSurfaceCreated(SampleRenderer.this);
                     }
                 }
+        @Override
+        public void onSampleRendererr(GLES30 gles30){
+
+            clear(null,0f,0f,0f,0f);
+            renderer.onDrawFrame(SampleRenderer.this);
+
+        }
         );
 }//To ibe IMpemented
 
@@ -34,7 +45,7 @@ public class SampleRenderer {
 //
 //                    }
 
-//                    @Override
+//                     @Override
 //                    public void onDrawFrame(GLES30 gl30) {
 //
 //
@@ -48,4 +59,5 @@ public class SampleRenderer {
 
 //        public static void onSurface(SampleRenderer renderer);
     }
+
 }
