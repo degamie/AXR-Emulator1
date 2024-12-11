@@ -109,6 +109,7 @@ public final float[] worldDirectionLight={0,0,0};
 
 
 
+
 //    private Object Manifest;
 
     show();
@@ -166,8 +167,13 @@ public final float[] worldDirectionLight={0,0,0};
     //Intent.ACTION_
 
 //        @Override
-        public void onCreate(Bundle savedInstancestate,Switch flashableLightSwitch){
+        protected void onCreate(Bundle savedInstancestate,Switch flashableLightSwitch){
             super.onCreate(savedInstancestate);
+            setContentView=setContentView(R.layout.activity_main_axractivity);
+            surfaceView= surfaceView.findViewById(R.id.surfaceview);
+            displayRotationHelper=new DisplayRotationHelper(
+                    this);
+
             //Torchlight Implementation
             Switch flashableLightSwitch;
             flashableLightSwitch=findViewById(R.id.SwitchFlashLight);
