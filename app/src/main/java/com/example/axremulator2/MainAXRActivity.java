@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowInsets;
+import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -29,7 +30,9 @@ import com.example.axremulator2.Common.Helpers.PlaneRenderer;
 import com.example.axremulator2.Common.Helpers.SampleRenderer;
 import com.example.axremulator2.Common.Helpers.TapHelper;
 import com.example.axremulator2.databinding.ActivityMainAxractivityBinding;
+import com.google.android.filament.Texture;
 import com.google.ar.core.ArCoreApk;
+import com.google.ar.core.InstantPlacementPoint;
 import com.google.ar.core.Mesh;
 import com.google.ar.core.RecordingConfig;
 import com.google.ar.core.Session;
@@ -90,6 +93,7 @@ public class MainAXRActivity extends AppCompatActivity implements SampleRenderer
     boolean mSession=false;
     boolean mRequestedInstall=false;
     boolean isGranted=false;
+    public  boolean installReq;
 
 public final Texture dfgTexture;
 public final specularCubemapFilter CubemapFilter;
@@ -171,6 +175,12 @@ public final float[] worldDirectionLight={0,0,0};
             super.onCreate(savedInstancestate);
             setContentView=setContentView(R.layout.activity_main_axractivity);
             surfaceView= surfaceView.findViewById(R.id.surfaceview);
+            GLSurfaceView.Renderer render=new GLSurfaceView.Renderer();
+            installReq=false;
+            depthSettings.onCreate(this);
+            InstantPlacementSettings.onCreate(this);
+            ImageButton imgbtn=findViewById(R.id.settings_button);
+
             displayRotationHelper=new DisplayRotationHelper(
                     this);
 
