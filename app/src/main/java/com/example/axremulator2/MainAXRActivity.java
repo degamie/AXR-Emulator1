@@ -1,8 +1,6 @@
 package com.example.axremulator2;
 
-import android.graphics.Camera;
 import android.hardware.camera2.CameraManager;
-import android.os.Bundle;
 import android.annotation.SuppressLint;
 
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -25,14 +23,13 @@ import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.example.axremulator2.Common.Helpers.CameraPermissionHelper;
-import com.example.axremulator2.Common.Helpers.PlaneRenderer;
-import com.example.axremulator2.Common.Helpers.SampleRenderer;
-import com.example.axremulator2.Common.Helpers.TapHelper;
+import com.example.axremulator2.Common.helpers.CameraPermissionHelper;
+import com.example.axremulator2.Common.helpers.PlaneRenderer;
+import com.example.axremulator2.Common.helpers.SampleRenderer;
+import com.example.axremulator2.Common.helpers.TapHelper;
 import com.example.axremulator2.databinding.ActivityMainAxractivityBinding;
 import com.google.android.filament.Texture;
 import com.google.ar.core.ArCoreApk;
-import com.google.ar.core.InstantPlacementPoint;
 import com.google.ar.core.Mesh;
 import com.google.ar.core.RecordingConfig;
 import com.google.ar.core.Session;
@@ -40,7 +37,7 @@ import com.google.ar.core.exceptions.UnavailableUserDeclinedInstallationExceptio
 
 import java.io.File;
 import java.util.ArrayList;
-import com.example.axremulator2.Common.Helpers.DisplayRotationHelper;
+import com.example.axremulator2.Common.helpers.DisplayRotationHelper;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
