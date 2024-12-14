@@ -24,6 +24,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.axremulator2.Common.helpers.CameraPermissionHelper;
+import com.example.axremulator2.Common.helpers.FlashLightController;
 import com.example.axremulator2.Common.helpers.PlaneRenderer;
 import com.example.axremulator2.Common.helpers.SampleRenderer;
 import com.example.axremulator2.Common.helpers.TapHelper;
@@ -43,6 +44,10 @@ import com.example.axremulator2.Common.helpers.DisplayRotationHelper;
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
+
+public MainActivity extends FlashLightController{
+    FlashLightController flashLightController;
+}
 public class MainAXRActivity extends AppCompatActivity implements SampleRenderer.Renderer {
 
 
@@ -77,13 +82,6 @@ public class MainAXRActivity extends AppCompatActivity implements SampleRenderer
     public TapHelper tapHelper;
     public PlaneRenderer planerender;
     public DisplayRotationHelper displayRotationHelper;
-
-
-
-
-
-
-
     public CameraPermissionHelper cameraPermissionHelper;
     Object mArButton=new Object();
     boolean mUserRequestedInstall = true;
@@ -178,29 +176,7 @@ public final float[] worldDirectionLight={0,0,0};
             InstantPlacementSettings.onCreate(this);
             ImageButton imgbtn=findViewById(R.id.settings_button);
 
-            displayRotationHelper=new DisplayRotationHelper(
-                    this);
 
-            //Torchlight Implementation
-            Switch flashableLightSwitch;
-            flashableLightSwitch=findViewById(R.id.SwitchFlashLight);
-            CameraManager cameraManager=cameraManager.openCamera(cameraPermissionHelper.this);
-            if(getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
-                if(getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
-                }
-            }
-            else {
-                Toast.makeText(MainActivity.this,"Device without Camera",Toast.LENGTH_SHORT);
-            }
-
-
-//            CameraManager cameraManager=(CameraManager)
-
-
-            setContentView(R.layout.activity_main_axractivity);
-            surfaceView=findById(R.id.surfaceView);
-            displayRotationHelper=new DisplayRotionHelper;
-            TapHelper tapHelper=new TapHelper();
         }
 //        mArButton=CameraPerissionHelper.handleCameraPermission();
 //        Modifier.align(Alignment.ButtonCenter);
