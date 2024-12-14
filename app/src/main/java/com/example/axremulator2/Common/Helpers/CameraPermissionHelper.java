@@ -1,4 +1,4 @@
-package com.example.axremulator2.Common.Helpers;
+package com.example.axremulator2.Common.helpers;
 
 import android.app.Activity;
 import android.content.Intent;
