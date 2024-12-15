@@ -25,26 +25,24 @@ public class PlaneRenderer {
     private Mesh meshobj;
     private IndexBuffer indexBuffer;
     private VertexBuffer vertexBuffer;
-    public   Shader shader;
-
-    private FloatBuffer vertexBuffer=
+    public Shader shader;
+//    public static final INITIAL_VERTEX_BUFFER_SIZE_BYTES=BYTES_PER_FLOAT*COORDS_PER
+    public FloatBuffer vertexBuffer =
             ByteBuffer.allocateDirect(INITIAL_VERTEX_BUFFER_SIZE)
                     .order(ByteOrder.nativeOrder())
                     .asFloatBuffer()
-                    .indexBuffer=ByteBuffer.allocateDirect(INITIAL_VERTEX_BUFFER_SIZE_BYTES);
-                    .order(ByteOrder.nativeOrder())
-                    .asIntBuffer();
+                    .indexBuffer = ByteBuffer.allocateDirect(INITIAL_VERTEX_BUFFER_SIZE_BYTES);
+
 
     public final float [] viewMatrix=new float[16];
     public final float [] ModelMatrix=new float[16];
     public final float [] ModelViewMatrix=new float[16];
     public final float [] ModelViewProjectionMatrix=new float[3];
     public final  float [] PlaneAngularMatrix=new float[4];
-
     public final float [] normalVector=new float[3];
     public List<SortedList> sortablePlanes=new ArrayList<>();
-
     public final Map<Plane,Integer> planeIndexMap=new HashMap<>();
+
     public void DrawPlanes(SampleRenderer sampleRenderer, Collection<Plane>allPlanes, Pose CameraPose,float [] cameraProjection ){
         List<SortedList> sortablePlanes=new ArrayList<>();
         for(Plane plane:allPlanes){
@@ -56,12 +54,31 @@ public class PlaneRenderer {
             sortablePlanes.add(new sortablePlanes(distance,plane));
             Collections.sort(sortablePlanes,new Compartor<sortablePlanes>());
     }
+        CameraPose.inverse().toMatrix(viewMatrix,0);
 }
 @Override
 public int unSimiliar(sortablePlanes a,sortablePlanes b){
     return float.unSimiliar(b.distnace,a.distance);
     }
 }
+public void updatePlaneRenderParameters(float planeMatrix,float[] extentX,float[] extentZ,FloatBuffer boundary){
+     FloatBuffer vertexBuffer;
+     FloatBuffer indexBuffer;
+    System.arraycopy(planeMatrix,0,modelMatrix,0,null);
+    if(boundary==null){
+        vertexBuffer.limit(0);
+        indexBuffer.limit(0);
+        return;
+    }
+    int boundaryVertices=boundary.limit()/2;
+    final int INDICES_PER_BOUNDARY_VERT = 0;
+    final int VERTS_PER_BOUNDARY_VERT = 0;
+
+    int numVertices=boundaryVertices*VERTS_PER_BOUNDARY_VERT;
+    int numIndeces=boundaryVertices*INDICES_PER_BOUNDARY_VERT;
+}
 
     private float calculateDistanceToPlane(Pose centerPose, Pose cameraPose) {}
+
+
 //    private float calculateDistanceToPlane(Pose centerPose, Pose cameraPose) {}

@@ -1,7 +1,6 @@
-package com.example.axremulator2.Common.Helpers;
+package com.example.axremulator2.Common.helpers;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.hardware.camera2.CameraManager;
 import android.hardware.display.DisplayManager;
 import android.view.Display;
@@ -15,7 +14,7 @@ public class DisplayRotationHelper {
     public int viewWidth;
 
     @SuppressLint("ServiceCast")
-    public DisplayRotationHelper(Context context){
+    public DisplayRotationHelper(FlashLightController context){
         displayManager =(displayManager)context.getSystemService(context.DISPLAY_SERVICE);
         cameraManager=(cameraManager)context.getSystemService(context.CAMERA_SERVICE);
     }
