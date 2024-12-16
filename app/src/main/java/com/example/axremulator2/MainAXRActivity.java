@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowInsets;
@@ -199,6 +200,17 @@ public final float[] worldDirectionLight={0,0,0};
         }
         return enablearapp;
     }
+    protected boolean settingsMenuItemBtn(MenuItem item){
+            if (item.getItemId() == R.id.depth_settings) {
+                launchDepthSettingsDialog();
+                return true;
+            } else if (item.getItem() == R.id.instant_placement_settings) {
+                launchDepthSettingsDialog();
+                return true;
+            } else {
+                return false;
+            }
+        }
 
     //Ar Core Camera's Real world Activity Remain to start
     //Testing Purposes(recording a screen)    //Currently
