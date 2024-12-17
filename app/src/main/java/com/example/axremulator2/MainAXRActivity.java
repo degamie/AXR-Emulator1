@@ -1,5 +1,7 @@
 package com.example.axremulator2;
 
+import static com.google.ar.core.aj.e;
+
 import android.hardware.camera2.CameraManager;
 import android.annotation.SuppressLint;
 
@@ -35,6 +37,10 @@ import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.Mesh;
 import com.google.ar.core.RecordingConfig;
 import com.google.ar.core.Session;
+import com.google.ar.core.exceptions.UnavailableApkTooOldException;
+import com.google.ar.core.exceptions.UnavailableArcoreNotInstalledException;
+import com.google.ar.core.exceptions.UnavailableDeviceNotCompatibleException;
+import com.google.ar.core.exceptions.UnavailableSdkTooOldException;
 import com.google.ar.core.exceptions.UnavailableUserDeclinedInstallationException;
 
 import java.io.File;
@@ -52,6 +58,7 @@ public MainActivity extends FlashLightController{
 public class MainAXRActivity extends AppCompatActivity implements SampleRenderer.Renderer {
 
 
+//    public String message=;
     //New AXR Implementation
     //TorchLight Implementation
     public Switch flashableLightSwitch;
@@ -131,6 +138,8 @@ public final float[] worldDirectionLight={0,0,0};
     @Override
     private void StartDefaultCamera(){}
     protected void onResume(){
+        String message=null;
+        String exception=null;
         super.onResume();
         if(!cameraPermissionHelper.hasCameraPermission(this)){cameraPermissionHelper.requestCameraPermisssion(this);return;}
         try{
@@ -145,13 +154,41 @@ public final float[] worldDirectionLight={0,0,0};
                 }
             }
         }
+
+        if(!CameraPermissionHelper.hasCameraPermission(this)) {
+            CameraPermissionHelper.requestCameraPermisssion(this);
+            return;
+            Session session=new Session();
+        }
         catch(UnavailableUserDeclinedInstallationException e){
             Toast.makeText(this,
                     "TODO:handleException"+e.LENGTH_LONG).show();
             return;
         }
         catch (UnavailableUserDeclinedInstallationException e){return;}
+
+        catch(UnavailableArcoreNotInstalledException | UnavailableUserDeclinedInstallationException e){
+            message="Install AXRCore";
+            exception=e;
     }
+        catch(UnavailableApkTooOldException e){
+            message="Please Update AXRCore Application ";
+            exception=e;
+        }
+        catch(UnavailableDeviceNotCompatibleException e){
+            message="Install AXRCore";
+            exception=e;
+        }
+
+        catch(UnavailableSdkTooOldException e){
+            message="Pls Update the AXRCore App";
+            exception=e;
+        }
+        catch(Exception e) {
+            message="Unable to create AXR Core App Session";
+            exception=e;
+        }
+        }
     @Override
     public void onRequestPermissionResult(int requestCode,String permissions,int[] results){
         super.onRequestPermissionsResult(requestCode,permissions,results);
