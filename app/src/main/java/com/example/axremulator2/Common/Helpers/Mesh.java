@@ -1,6 +1,5 @@
-package com.example.axremulator2.Common.Helpers;
+package com.example.axremulator2.Common.helpers;
 
-import static android.graphics.Canvas.VertexMode.TRIANGLE_STRIP;
 import static android.system.Os.close;
 
 //import static com.google.ar.core.ai.t;
@@ -12,6 +11,7 @@ import com.google.android.filament.VertexBuffer;
 
 public class Mesh {
     private int glesEnum;
+    private final int[] vertexArrayId={0};
     public Enum PrimitiveMode{
         POINTS(GLES30.GL_POINTS),
                 LINE_STRIP(GLES30.GL_LINE_STRIP),
@@ -24,6 +24,9 @@ public class Mesh {
 
     public final PrimitiveMode primitiveMode;
     public final IndexBuffer indexBuffer;
+    public IndexBuffer getBufferId(int vertexArrayId){
+        return indexBuffer.notifyAll(vertexArrayId);
+    }
     public final VertexBuffer vertexBuffer;
     private void PrimitiveMode(int glesEnum){
         this.glesEnum=glesEnum;
@@ -44,18 +47,30 @@ public class Mesh {
             throw T;
         }
     }
-    public final int [] VertexArrayId=[0];
+        try{
+            int[] vertexArrayId;
+            GLES30.glGenVertexArrays(1,vertexBuffer,0);
+            GLES30.glBindVertexArray(vertexArrayId[0]);
+            if(indexBuffer!=null){
+                GLES30.glBindBuffer(GLES30.GL_ELEMENT_ARRAY_BUFFER,indexBuffer.getBufferId(vertexArrayId));
+            }
+           // GLError.ma
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        public final int [] VertexArrayId=[0];
 
 
-//To Be Implemented
-    private void LINE(int glLines) {
-    }
-
-    private void POINTS(int glPoints) {
-
-    }
-
-    private void LINE_LOOP(int glLineLoop) {
-
-    }
 }
+}
+////To Be Implemented
+//    private void LINE(int glLines) {
+//    }
+//
+//    private void POINTS(int glPoints) {
+//
+//    }
+//
+//    private void LINE_LOOP(int glLineLoop) {
+//
+//    }
