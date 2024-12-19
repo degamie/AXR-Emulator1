@@ -107,7 +107,10 @@ public final float[] ViewMatrixInverse=new float[16];
 public final float[] ViewLightDirectionMatrix=new float[4];
 public final float[] worldDirectionLight={0,0,0};
 
-
+public void onWindowFocusChanged(boolean hasFocus){
+    super.onWindowFocusChanged(hasFocus);
+    FullScreenProvider.setFullScreenOnWindowFocusChanged(this,hasFocus);
+}
 
 
 //    private Object Manifest;
