@@ -91,7 +91,7 @@ public class FlashLightController extends CameraPermissionHelper{
             try{
                 cameraManager.setTorchMode(getCameraid,true){
                     Toast flashLightIsTunredOnn = Toast.makeText(mainActivity.this, "FlashLight is Tunred Onn");
-                    Toast.LENGTH_SHORT().show();
+                    int lengthShort =Toast.LENGTH_SHORT;
                 }
             }
             catch (CameraAccessException e){
@@ -100,8 +100,8 @@ public class FlashLightController extends CameraPermissionHelper{
         }
       else{
           try{
-                cameraManager.setTorchMode(getCameraid,true){
-                  Toast flashLightIsTunredOff=Toast.makeText(MainActivity.this,"FlashLight is Tunred Off");
+                cameraManager.setTorchMode(getCameraid,false){
+                  Toast flashLightIsTunredOff=Toast.makeText(mainActivity.this,"FlashLight is Tunred Off");
                   int lengthShort = Toast.LENGTH_SHORT;
                 }
             }
