@@ -2,6 +2,7 @@ package com.example.axremulator2;
 
 import static com.google.ar.core.aj.e;
 
+import android.app.AlertDialog;
 import android.hardware.camera2.CameraManager;
 import android.annotation.SuppressLint;
 
@@ -32,6 +33,7 @@ import com.example.axremulator2.Common.helpers.TapHelper;
 import com.example.axremulator2.databinding.ActivityMainAxractivityBinding;
 import com.google.android.filament.Texture;
 import com.google.ar.core.ArCoreApk;
+import com.google.ar.core.Config;
 import com.google.ar.core.Mesh;
 import com.google.ar.core.RecordingConfig;
 import com.google.ar.core.Session;
@@ -184,6 +186,19 @@ public void onWindowFocusChanged(boolean hasFocus){
             message="Unable to create AXR Core App Session";
             exception=e;
         }
+        }
+        @Override
+        protected void showOcclusionDisplayIfRequired() {
+            String isDepthSupported = session.isDepthModeSupported(Config.DepthMode.AUTOMATIC)
+            if (!depthSettings.ShouldshowDepthEnableDialog() || isDepthSupported) {
+                return;
+            }
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.options_title)
+                    .setMessage(R.string.use_explanation)
+                    .setPositiveButton(R.string.dummy_button,DepthInterface dialog,Width)->{
+                depthSettings.setUseDepthForOcclusion(true);
+            }
         }
     @Override
     public void onRequestPermissionResult(int requestCode,String permissions,int[] results){
