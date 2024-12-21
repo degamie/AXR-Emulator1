@@ -13,9 +13,11 @@ import androidx.core.content.ContextCompat;
 
 import android.content.pm.PackageManager;
 import android.graphics.Shader;
+import android.media.Image;
 import android.net.Uri;
 import android.opengl.GLSurfaceView;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -27,8 +29,8 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.axremulator2.Common.helpers.CameraPermissionHelper;
-import com.example.axremulator2.Common.helpers.PlaneRenderer;
-import com.example.axremulator2.Common.helpers.SampleRenderer;
+//import com.example.axremulator2.Common.helpers.PlaneRenderer;
+
 import com.example.axremulator2.Common.helpers.TapHelper;
 import com.example.axremulator2.databinding.ActivityMainAxractivityBinding;
 import com.google.android.filament.Texture;
@@ -39,8 +41,11 @@ import com.google.ar.core.RecordingConfig;
 import com.google.ar.core.Session;
 
 import java.io.File;
+import java.time.Instant;
 import java.util.ArrayList;
 import com.example.axremulator2.Common.helpers.DisplayRotationHelper;
+import com.example.axremulator2.Common.helpers.SampleRenderer.*;
+import com.example.axremulator2.Common.helpers.*;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -50,21 +55,39 @@ import com.example.axremulator2.Common.helpers.DisplayRotationHelper;
 //public MainActivity extends FlashLightController{
 //    FlashLightController flashLightController;
 //}
-public class MainActivity extends AppCompatActivity implements SampleRenderer.Renderer {
+public class MainActivity extends AppCompatActivity {
 
-
-//    public String message=;
+    public Bundle savedInstancestate;
+    public Manifest manifest;
+    public static float Z_NEAR = .15f;
+    public static float Z_FAR = 150f;
+    public static int CUBEMMAP_RESOLUTION = 17;
+    public static int CUBEMMAP_NUMBER_OF_IMPORTANT_SAMPLES = 32;
+    public final Texture dfgTexture;
+    public final specularCubemapFilter CubemapFilter;
+    public final Mesh VirtualMesh;
+    public final Shader ShadingCompiler;
+    public final Texture virutalTexturealBedo;
+    public final Texture ObjAlbedoPlacemntTexure;
+    public final List<WrappedAnchor> wrappedAnchorList = new ArrayList<>();
+    public final float[] modelMatrix = new float[16];
+    public final float[] viewMatrix = new float[16];
+    public final float[] ProjectedMatrix = new float[16];
+    public final float[] modelViewMatrix = new float[16];
+    public final float[] modelViewMatrixProjection = new float[16];
+    public final float[] ViewMatrixInverse = new float[16];
+    public final float[] ViewLightDirectionMatrix = new float[4];
+    public final float[] worldDirectionLight = {0, 0, 0};
+    //    public String message=;
     //New AXR Implementation
     //TorchLight Implementation
     public Switch flashableLightSwitch;
     public CameraManager cameraManager;
 
 
-
     //Testing AR COre Camera INDEV
-    public static final String SEARCHING_PLANE_MESSAGE="Searching For Ground Surface";
-    public static final String WAITING_FOR_TAP_MESSAGE="Tap on Surface to place an Object on Surface";
-
+    public static final String SEARCHING_PLANE_MESSAGE = "Searching For Ground Surface";
+    public static final String WAITING_FOR_TAP_MESSAGE = "Tap on Surface to place an Object on Surface";
     .31f;
     .45f;
     .661f;
@@ -72,13 +95,6 @@ public class MainActivity extends AppCompatActivity implements SampleRenderer.Re
     .661f;
     .661f;
     .661f;
-    }
-    public static float Z_NEAR=.15f;
-    public static float Z_FAR=150f;
-
-
-    public   static int CUBEMMAP_RESOLUTION=17;
-    public   static int CUBEMMAP_NUMBER_OF_IMPORTANT_SAMPLES=32;
 
     public GLSurfaceView surfaceView;
     public Session session;
@@ -86,38 +102,20 @@ public class MainActivity extends AppCompatActivity implements SampleRenderer.Re
     public PlaneRenderer planerender;
     public DisplayRotationHelper displayRotationHelper;
     public CameraPermissionHelper cameraPermissionHelper;
+    public  boolean installReq;
     Object mArButton=new Object();
     boolean mUserRequestedInstall = true;
     boolean mSession=false;
     boolean mRequestedInstall=false;
     boolean isGranted=false;
-    public  boolean installReq;
+    private MainActivity depthSettings;
 
-public final Texture dfgTexture;
-public final specularCubemapFilter CubemapFilter;
-public final Mesh VirtualMesh ;
-public final Shader ShadingCompiler;
-public final Texture virutalTexturealBedo;
-public final Texture ObjAlbedoPlacemntTexure;
-public final List<WrappedAnchor> wrappedAnchorList=new ArrayList<>();
-public final float[] modelMatrix=new float[16];
-public final float[] viewMatrix=new float[16];
-public final float[] ProjectedMatrix=new float[16];
-public final float[] modelViewMatrix=new float[16];
-public final float[] modelViewMatrixProjection=new float[16];
-public final float[] ViewMatrixInverse=new float[16];
-public final float[] ViewLightDirectionMatrix=new float[4];
-public final float[] worldDirectionLight={0,0,0};
+    MainActivity();
 
-public void onWindowFocusChanged(boolean hasFocus){
-    super.onWindowFocusChanged(hasFocus);
-    FullScreenProvider.setFullScreenOnWindowFocusChanged(this,hasFocus);
-}
-
-
-//    private Object Manifest;
-
-    show();
+    public String onWindowFocusChanged(boolean hasFocus){
+        super.onWindowFocusChanged(hasFocus);
+        FullScreenProvider.setFullScreenOnWindowFocusChanged(this,hasFocus);
+    }
 
     //Enabling Camera Permissions to Record the Live Camera Outside Scene Activity
     @Override
@@ -132,26 +130,31 @@ public void onWindowFocusChanged(boolean hasFocus){
         }
         return Display;
     }
-//        return null;
+
+    //        return null;
     @Override
     private void StartDefaultCamera(){}
-    protected void onResume(){
-        String message=null;
-        String exception=null;
+
+    protected void onResume() {
+        String message = null;String exception = null;
         super.onResume();
-        if(!cameraPermissionHelper.hasCameraPermission(this)){cameraPermissionHelper.requestCameraPermisssion(this);return;}
-        try{
-            if(mSession==null){
-                switch(ArCoreApk.getInstance().requestInstall(this,mUserRequestedInstall)){
+        if (!cameraPermissionHelper.hasCameraPermission(this)) {
+            cameraPermissionHelper.requestCameraPermisssion(this);
+            return;
+        }
+        try {
+            if (mSession == null) {
+                switch (ArCoreApk.getInstance().requestInstall(this, mUserRequestedInstall)) {
                     case INSTALLED:
-                        mSession=new mSession();
+                        mSession = new mSession();
                         break;
                     case INSTALL_REQUESTED:
-                        mRequestedInstall=false;
+                        mRequestedInstall = false;
                         return;
                 }
             }
         }
+
 
         if(!CameraPermissionHelper.hasCameraPermission(this)) {
             CameraPermissionHelper.requestCameraPermisssion(this);
@@ -187,7 +190,8 @@ public void onWindowFocusChanged(boolean hasFocus){
             exception=e;
         }
         }
-        @Override
+
+    @Override
         protected void showOcclusionDisplayIfRequired() {
             String isDepthSupported = session.isDepthModeSupported(Config.DepthMode.AUTOMATIC)
             if (!depthSettings.ShouldshowDepthEnableDialog() || isDepthSupported) {
@@ -200,6 +204,7 @@ public void onWindowFocusChanged(boolean hasFocus){
                 depthSettings.setUseDepthForOcclusion(true);
             }
         }
+
     @Override
     public void onRequestPermissionResult(int requestCode,String permissions,int[] results){
         super.onRequestPermissionsResult(requestCode,permissions,results);
@@ -217,29 +222,27 @@ public void onWindowFocusChanged(boolean hasFocus){
 //        @Override
         protected void onCreate(Bundle savedInstancestate,Switch flashableLightSwitch){
             super.onCreate(savedInstancestate);
-            setContentView=setContentView(R.layout.activity_main_axractivity);
+            String setContentView=setContentView(R.layout.activity_main_axractivity);
             surfaceView= surfaceView.findViewById(R.id.surfaceview);
             GLSurfaceView.Renderer render=new GLSurfaceView.Renderer();
             installReq=false;
-            depthSettings.onCreate(this);
-            InstantPlacementSettings.onCreate(this);
+            Image depthSettings=depthSettings.getPlanes(surfaceView);
+            Instant InstantPlacementSettings=InstantPlacementSettings(surfaceView);
             ImageButton imgbtn=findViewById(R.id.settings_button);
-
-
-        }
-//        mArButton=CameraPerissionHelper.handleCameraPermission();
-//        Modifier.align(Alignment.ButtonCenter);
-//        String Text="Take Video";
-        //Intent.ACTION_
-
-
-
-    public void handleCameraPermission(){
-        if(ContextCompat.checkSelfPermission(Manifest.permission.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION)){
-            this.Manifest.Permission.camera== PackageManager.PERMISSION_GRANTED;
         }
     }
 
+        public class MainActivity extends  SampleRenderer{
+
+    public void handleCameraPermission(){
+        if(ContextCompat.checkSelfPermission(Manifest.permission.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION)){
+            Manifest.permission.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION== PackageManager.PERMISSION_GRANTED;
+        }
+    }
+        public void onSurfaceChanged(SampleRendere renderer,int width,int height){
+            displayRotationHelper.onSurfaceChanged(width,height);
+            virtualSceneFrameBuffer.resize(width,height);
+        }
     public String enableARCoreAppButton(){
         Boolean enablearapp=false;
         ArCoreApk.getInstance().checkAvailabilityAsync(this, availibility-> {
@@ -248,6 +251,7 @@ public void onWindowFocusChanged(boolean hasFocus){
         }
         return enablearapp;
     }
+        }
     protected boolean settingsMenuItemBtn(MenuItem item){
             if (item.getItemId() == R.id.depth_settings) {
                 launchDepthSettingsDialog();
@@ -362,7 +366,7 @@ public void onWindowFocusChanged(boolean hasFocus){
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.(savedInstanceState);
 
         binding = ActivityMainAxractivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -442,7 +446,12 @@ public void onWindowFocusChanged(boolean hasFocus){
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
 }
-}
+
+
+
+
+//    private Object Manifest;
+
 //                mArButton.setAvailability(View.VISIBLE);
 //                mArButton.set
 //               Enabled(true);
