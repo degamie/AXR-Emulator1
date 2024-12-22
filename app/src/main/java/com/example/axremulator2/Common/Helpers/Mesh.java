@@ -1,15 +1,20 @@
 package com.example.axremulator2.Common.helpers;
 
+import static android.opengl.Matrix.length;
 import static android.system.Os.close;
 
 //import static com.google.ar.core.ai.t;
 
+import android.health.connect.datatypes.units.Length;
 import android.opengl.GLES30;
 
 import com.google.android.filament.IndexBuffer;
 import com.google.android.filament.VertexBuffer;
+import android.health.connect.datatypes.units.Length;
 
 public class Mesh {
+    int [] VertexArrayId=[0];
+//    public Length length= new Length();
     private int glesEnum;
     private final int[] vertexArrayId={0};
     public Enum PrimitiveMode{
@@ -36,9 +41,9 @@ public class Mesh {
         this.vertexBuffer=vertexBuffer;
         this.primitiveMode=primitiveMode;
 
-        if(vertexBuffer==null || VertexBuffer.Length==0){]
+        if(vertexBuffer==null ||  length()==0){
         try{
-            GLES30.glBindVertexArray(1,VertexArrayId,0);
+            GLES30.glBindVertexArray(1,vertexArrayId,0);
             GLError.maybeThrowGLException("AxR Emualtor's Object's GUI Not Found");
 
         }
@@ -52,13 +57,13 @@ public class Mesh {
             GLES30.glGenVertexArrays(1,vertexBuffer,0);
             GLES30.glBindVertexArray(vertexArrayId[0]);
             if(indexBuffer!=null){
-                GLES30.glBindBuffer(GLES30.GL_ELEMENT_ARRAY_BUFFER,indexBuffer.getBufferId(vertexArrayId));
+                GLES30.glBindBuffer(GLES30.GL_ELEMENT_ARRAY_BUFFER,indexBuffer.setBuffer(vertexArrayId););
             }
            // GLError.ma
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        public final int [] VertexArrayId=[0];
+
 
 
 }

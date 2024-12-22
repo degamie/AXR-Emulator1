@@ -1,13 +1,16 @@
-package com.example.axremulator2.Common.Helpers;
+package com.example.axremulator2.Common.helpers;
 
 import android.content.Context;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
+
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 public class TapHelper {
+    public GestureDetector gestureDetector;
     private final BlockingQueue<MotionEvent> queuedSingleTaps=new ArrayBlockingQueue<>(16);
     public TapHelper(Context context){
          GestureDetector gestureDetector=new GestureDetector(
@@ -27,5 +30,9 @@ public class TapHelper {
     }
     public MotionEvent poll(){
         return queuedSingleTaps.poll();
+    }
+    @Override
+    public Boolean onTouch(View view ,MotionEvent motionEvent){
+        return gestureDetector.onTouchEvent(motionEvent);
     }
 }
