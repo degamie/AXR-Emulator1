@@ -78,6 +78,13 @@ public void updatePlaneRenderParameters(float planeMatrix,float[] extentX,float[
     int numVertices=boundaryVertices*VERTS_PER_BOUNDARY_VERT;
     int numIndeces=boundaryVertices*INDICES_PER_BOUNDARY_VERT;
 }
+private static class SortablePlanes{
+    float distance;float plane;
+    SortablePlanes(distance,plane){
+        this.distance=distance;
+        this.plane=plane;
+    }
+}
 
     public static float calculateDistanceToPlane(Pose planePose, Pose cameraPose) {
         float[] normal=new float[3];
