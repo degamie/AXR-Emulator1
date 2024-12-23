@@ -18,4 +18,7 @@ public class DepthSettings {
 
         return enable; //TO be Implemented
     }
+    public Boolean depthColorVisualization(){
+        return depthColorVisualization();
+    }
 }
