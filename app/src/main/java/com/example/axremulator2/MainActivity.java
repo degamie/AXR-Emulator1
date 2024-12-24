@@ -3,6 +3,7 @@ package com.example.axremulator2;
 import static com.google.ar.core.aj.e;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.hardware.camera2.CameraManager;
 import android.annotation.SuppressLint;
 
@@ -10,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.databinding.tool.Context;
 
 import android.content.pm.PackageManager;
 import android.graphics.Shader;
@@ -21,6 +23,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.Display;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowInsets;
@@ -31,6 +35,7 @@ import android.widget.Toast;
 import com.example.axremulator2.Common.helpers.CameraPermissionHelper;
 //import com.example.axremulator2.Common.helpers.PlaneRenderer;
 
+import com.example.axremulator2.Common.helpers.SampleRenderer;
 import com.example.axremulator2.Common.helpers.TapHelper;
 import com.example.axremulator2.databinding.ActivityMainAxractivityBinding;
 import com.google.android.filament.Texture;
@@ -46,6 +51,11 @@ import java.util.ArrayList;
 import com.example.axremulator2.Common.helpers.DisplayRotationHelper;
 import com.example.axremulator2.Common.helpers.SampleRenderer.*;
 import com.example.axremulator2.Common.helpers.*;
+import com.google.ar.core.exceptions.UnavailableApkTooOldException;
+import com.google.ar.core.exceptions.UnavailableArcoreNotInstalledException;
+import com.google.ar.core.exceptions.UnavailableDeviceNotCompatibleException;
+import com.google.ar.core.exceptions.UnavailableSdkTooOldException;
+import com.google.ar.core.exceptions.UnavailableUserDeclinedInstallationException;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -83,6 +93,14 @@ public class MainActivity extends AppCompatActivity {
     //TorchLight Implementation
     public Switch flashableLightSwitch;
     public CameraManager cameraManager;
+    MainActivity() {
+        dfgTexture = null;
+        ShadingCompiler = null;
+        virutalTexturealBedo=null;
+        ObjAlbedoPlacemntTexure=null;
+        VirtualMesh=null;
+        CubemapFilter=null;
+    }
 
 
     //Testing AR COre Camera INDEV
@@ -109,17 +127,18 @@ public class MainActivity extends AppCompatActivity {
     boolean mRequestedInstall=false;
     boolean isGranted=false;
     private MainActivity depthSettings;
+    public MenuItem item;
 
-    MainActivity();
 
-    public String onWindowFocusChanged(boolean hasFocus){
+
+    public void onWindowFocusChanged(boolean hasFocus){
         super.onWindowFocusChanged(hasFocus);
         FullScreenProvider.setFullScreenOnWindowFocusChanged(this,hasFocus);
     }
 
     //Enabling Camera Permissions to Record the Live Camera Outside Scene Activity
     @Override
-    private String CameraPermission(ActivityResultContracts.RequestPermission){
+    private String CameraPermission(ActivityResultContracts.RequestPermission, Display display){
 
         if(isGranted){
 
@@ -128,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.LENGTH_LONG;
 
         }
-        return Display;
+        return display;
     }
 
     //        return null;
@@ -136,7 +155,8 @@ public class MainActivity extends AppCompatActivity {
     private void StartDefaultCamera(){}
 
     protected void onResume() {
-        String message = null;String exception = null;
+        String message = null;
+        String exception = null;
         super.onResume();
         if (!cameraPermissionHelper.hasCameraPermission(this)) {
             cameraPermissionHelper.requestCameraPermisssion(this);
@@ -153,17 +173,16 @@ public class MainActivity extends AppCompatActivity {
                         return;
                 }
             }
+            if(!CameraPermissionHelper.hasCameraPermission(this)) {
+                CameraPermissionHelper.requestCameraPermisssion(this);
+                return;
+                Session session=new Session();
+            }
         }
 
 
-        if(!CameraPermissionHelper.hasCameraPermission(this)) {
-            CameraPermissionHelper.requestCameraPermisssion(this);
-            return;
-            Session session=new Session();
-        }
         catch(UnavailableUserDeclinedInstallationException e){
-            Toast.makeText(this,
-                    "TODO:handleException"+e.LENGTH_LONG).show();
+            Toast.makeText(this,"TODO:handleException"+e.LENGTH_LONG).show();
             return;
         }
         catch (UnavailableUserDeclinedInstallationException e){return;}
@@ -189,7 +208,8 @@ public class MainActivity extends AppCompatActivity {
             message="Unable to create AXR Core App Session";
             exception=e;
         }
-        }
+
+}
 
     @Override
         protected void showOcclusionDisplayIfRequired() {
@@ -216,7 +236,26 @@ public class MainActivity extends AppCompatActivity {
             }
             finish();
         }
+        protected void launchInstantPlacementSettings(){
+            MenuDialog()->{
+                resetSettingsMenuDialogCheckedBoxes();
+            }
+        }
+        protected void  launchDepthSettingsMenuDialog(){
+            resetSettingsMenuDialogCheckedBoxes();
+            if(session.isDepthModeSupported(Config.DepthMode.AUTOMATIC)){
+                new AlertDialog.Builder(this)
+                .setTitle(R.string.options_title_with_depth)
+                depthSettingsMenuDialog,
+                        (DialogInterface dialog, int which, boolean isChecked)->{
+                            depthSettingsMenuDialocheckBoxesg [which]=isChecked;
+//            modelMatrix
+                        }
+                        .setMultiChoiceItems(getResources().getStringArray(R.array.depth));
 
+
+            }
+        }
     //Intent.ACTION_
 
 //        @Override
@@ -232,14 +271,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-        public class MainActivity extends  SampleRenderer{
+    private void resetSettingsMenuDialogCheckedBoxes() {
+    }
+
+    public class MainActivity extends SampleRenderer {
 
     public void handleCameraPermission(){
         if(ContextCompat.checkSelfPermission(Manifest.permission.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION)){
             Manifest.permission.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION== PackageManager.PERMISSION_GRANTED;
         }
     }
-        public void onSurfaceChanged(SampleRendere renderer,int width,int height){
+        public void onSurfaceChanged(SampleRenderer renderer,int width,int height){
             displayRotationHelper.onSurfaceChanged(width,height);
             virtualSceneFrameBuffer.resize(width,height);
         }
@@ -268,7 +310,7 @@ public class MainActivity extends AppCompatActivity {
     //Testing Purposes(recording a screen)    //Currently
 
     public void RecordSessionScreen(){
-        Session session=new Session(Context);
+        Session session=new Session(Context context);
          Uri destination=Uri.fromFile(new File(getFilesDir(),"FileManagement.mp4"));
         RecordingConfig recordingConfig=new RecordingConfig(session)
                 .setMp4DatasetUri(destination)
