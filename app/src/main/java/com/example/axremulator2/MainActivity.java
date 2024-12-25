@@ -4,6 +4,7 @@ import static com.google.ar.core.aj.e;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Camera;
 import android.hardware.camera2.CameraManager;
 import android.annotation.SuppressLint;
 
@@ -51,6 +52,7 @@ import java.util.ArrayList;
 import com.example.axremulator2.Common.helpers.DisplayRotationHelper;
 import com.example.axremulator2.Common.helpers.SampleRenderer.*;
 import com.example.axremulator2.Common.helpers.*;
+import com.google.ar.core.TrackingState;
 import com.google.ar.core.exceptions.UnavailableApkTooOldException;
 import com.google.ar.core.exceptions.UnavailableArcoreNotInstalledException;
 import com.google.ar.core.exceptions.UnavailableDeviceNotCompatibleException;
@@ -88,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
     public final float[] ViewMatrixInverse = new float[16];
     public final float[] ViewLightDirectionMatrix = new float[4];
     public final float[] worldDirectionLight = {0, 0, 0};
+    public Camera camera;
     //    public String message=;
     //New AXR Implementation
     //TorchLight Implementation
@@ -222,8 +225,21 @@ public class MainActivity extends AppCompatActivity {
                     .setMessage(R.string.use_explanation)
                     .setPositiveButton(R.string.dummy_button,DepthInterface dialog,Width)->{
                 depthSettings.setUseDepthForOcclusion(true);
-            }
+            } if (frame.getTimestamp() != 0) {
+            // Suppress rendering if the camera did not produce the first frame yet. This is to avoid
+            // drawing possible leftover data from previous sessions if the texture is reused.
+            backgroundRenderer.drawBackground(render);
         }
+
+        // If not tracking, don't draw 3D objects.
+        if (camera.getTrackingState() == TrackingState.PAUSED) {
+            return;
+        }
+        }
+//Camera Matrix
+
+    camera.getProjectionMatrix(projectionMatrix,Z_NEAR,Z_FAR);
+    camera.getViewMatrix(viewMatrix,0);
 
     @Override
     public void onRequestPermissionResult(int requestCode,String permissions,int[] results){
