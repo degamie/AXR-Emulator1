@@ -5,7 +5,8 @@ import android.content.SharedPreferences;
 public class DepthSettings {
     public  final String SHARED_PREFERNCES_ID="SHARED_PREFERNCES_OCCLUSIONS_OPTIONS";
     public  final String SHARED_PREFERNCES_SHOW_DEPTH_ENBALE_DIALOG_OOBE="SHARED_PREFERNCES_OCCLUSIONS_OPTIONS";
-
+public SharedPreferences sharedPreferences;
+public SharedPreferences.Editor editor;
     public Boolean useDepthForOcclusion(){
         return useDepthForOcclusion();
     }
@@ -18,7 +19,14 @@ public class DepthSettings {
 
         return enable; //TO be Implemented
     }
-    public Boolean depthColorVisualization(){
+    public Boolean shouldShowdepthColorVisualization(){
         return depthColorVisualization();
+    }
+    public void DepthEnableDialog(){
+    boolean showDialog =SharedPreferences.getBoolean(SHARED_PREFERNCES_ID,SHARED_PREFERNCES_SHOW_DEPTH_ENBALE_DIALOG_OOBE,true);
+    if(showDialog){
+        sharedPreferences.Editor=editor.putBoolean(SHARED_PREFERNCES_ID,SHARED_PREFERNCES_SHOW_DEPTH_ENBALE_DIALOG_OOBE,false);
+        editor.apply();
+    }
     }
 }
