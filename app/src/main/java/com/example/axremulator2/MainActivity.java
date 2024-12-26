@@ -1,7 +1,5 @@
 package com.example.axremulator2;
 
-import static com.google.ar.core.aj.e;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Camera;
@@ -50,7 +48,6 @@ import java.io.File;
 import java.time.Instant;
 import java.util.ArrayList;
 import com.example.axremulator2.Common.helpers.DisplayRotationHelper;
-import com.example.axremulator2.Common.helpers.SampleRenderer.*;
 import com.example.axremulator2.Common.helpers.*;
 import com.google.ar.core.TrackingState;
 import com.google.ar.core.exceptions.UnavailableApkTooOldException;
@@ -270,6 +267,13 @@ public class MainActivity extends AppCompatActivity {
                         .setMultiChoiceItems(getResources().getStringArray(R.array.depth));
 
 
+            }
+        }
+        public void onSurfaceCreated(SampleRenderer samplerenderer){
+            try{
+                PlaneRenderer planeRenderer=new PlaneRenderer();
+                VirtualSceneFrameBuffer virtualSceneframebuffer=new VirtualSceneFrameBuffer();
+                BackgroundRenderer backgroundRenderer=new BackgroundRenderer();
             }
         }
     //Intent.ACTION_
