@@ -1,5 +1,7 @@
 package com.example.axremulator2.Common.helpers;
 
+import android.opengl.GLES30;
+
 import java.nio.Buffer;
 
 public class GpuBuffer {
@@ -10,16 +12,37 @@ public class GpuBuffer {
     public int INT_SIZE=4;
     public int FLOAT_SIZE=4;
     private  int  target;
-
-    public GpuBuffer(target, int numberofBytesPerEntry, Buffer Entries){
-        if(Entries!=null){
-            if(!Entries.isDirect()){
+public final int numberOfBytesPerEntry= 0;
+    public GpuBuffer(target, int numberofBytesPerEntry, Buffer entries){
+        if(entries!=null){
+            if(!entries.isDirect()){
                 throw new IllegalArgumentException("if non-null entriesBuffer must be direct Buffer");
             }
-            if(Entries.limit()==0){
-                Entries=null;
+            if(entries.limit()==0){
+                entries=null;
             }
+            this.target=target;
+            this.numberOfBytesPerEntry=numberofBytesPerEntry;
+
+        if(entries==null){
+            this.size=0;
+            this.capacity=0;
         }
+        else {
+            this.size=entries.limit();
+            this.capacity=entries.limit();
+        }
+        try{
+            GLES30.glBindVertexArray(0);
+            GLError.maybeHTrowGLException("Failed to Throw Unbinding Vertex Array","glBIndVertexArray");
+            GLES30.glGenBuffers(1,bufferId,0);
+            GLError.maybeHTrowGLException("Failed to Unbind The Genederated Buffers" ,"glGenBuffera");
+            GLES30.glBindBuffer(target,bufferId[0]);
+            GLError.maybeHTrowGLException("Failed to Throw Buffer Object","glBindBuffer");
+
+        }
+        }
+
     }
 
 }
