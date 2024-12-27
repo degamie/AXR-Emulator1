@@ -36,10 +36,12 @@ import com.example.axremulator2.Common.helpers.CameraPermissionHelper;
 
 import com.example.axremulator2.Common.helpers.SampleRenderer;
 import com.example.axremulator2.Common.helpers.TapHelper;
+import com.example.axremulator2.axr_application.MainBatteryManagement;
 import com.example.axremulator2.databinding.ActivityMainAxractivityBinding;
 import com.google.android.filament.Texture;
 import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.Config;
+import com.google.ar.core.Frame;
 import com.google.ar.core.Mesh;
 import com.google.ar.core.RecordingConfig;
 import com.google.ar.core.Session;
@@ -93,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
     //TorchLight Implementation
     public Switch flashableLightSwitch;
     public CameraManager cameraManager;
+    public  Frame frame;
     MainActivity() {
         dfgTexture = null;
         ShadingCompiler = null;
@@ -211,7 +214,25 @@ public class MainActivity extends AppCompatActivity {
 
 }
 
-    @Override
+protected void onDrawFrame(SampleRenderer sampleRenderer)
+{
+    if(session==null){
+        return;
+    }
+    if(!hasSetTextureNames){
+        session.setCameraTextureName(
+                new Integer(){
+                    hasSetTextureNames=true;
+                    displayRotationHelper.updatesessionIfRequired(session);
+
+                    backgroundRenderer.updateDisplayGeometry(frame);
+
+
+//                    backgroundRenderer.sessi
+                }
+        );
+    }
+}    @Override
         protected void showOcclusionDisplayIfRequired() {
             String isDepthSupported = session.isDepthModeSupported(Config.DepthMode.AUTOMATIC)
             if (!depthSettings.ShouldshowDepthEnableDialog() || isDepthSupported) {
@@ -508,6 +529,7 @@ public class MainActivity extends AppCompatActivity {
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
 }
+public MainActivity extends MainBatteryManagement{}
 
 
 
