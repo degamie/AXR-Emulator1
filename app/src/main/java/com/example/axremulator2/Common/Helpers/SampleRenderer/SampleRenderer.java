@@ -73,6 +73,11 @@ public class SampleRenderer {
         GLES30.glGetError(new RuntimeException("Unbale to Find Dimension's ViePort Settings ").printStackTrace();
 
     }
+    public void onSurfaceChanged(GLES30 gles30,int w,int h){
+        ViewPortHeight=h;
+        ViewPortWidth=w;
+        renderer.onSurfaceChanged(SampleRenderer.this,w,h);
+    }
 };
 //To ibe IMpemented
 
