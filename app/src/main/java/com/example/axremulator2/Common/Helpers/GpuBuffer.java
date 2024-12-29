@@ -1,5 +1,7 @@
 package com.example.axremulator2.Common.helpers;
 
+import static java.lang.reflect.Array.set;
+
 import android.opengl.GLES30;
 
 import java.nio.Buffer;
@@ -42,6 +44,17 @@ public final int numberOfBytesPerEntry= 0;
 
         }
         }
+        public set(Buffer buffer){
+            if(entries==null || entries.limit()==0){
+                entries=0;
+                return ;
+
+                if(entries.isDirect()){
+                    throw new IllegalArgumentException("If non null RuntimeEntries(Buffer Occurs)its a Direct Buffer");
+                }
+            }
+        }
+
 
     }
 
