@@ -52,12 +52,13 @@ import java.util.ArrayList;
 import com.example.axremulator2.Common.helpers.DisplayRotationHelper;
 import com.example.axremulator2.Common.helpers.*;
 import com.google.ar.core.TrackingState;
+import com.google.ar.core.exceptions.CameraNotAvailableException;
 import com.google.ar.core.exceptions.UnavailableApkTooOldException;
 import com.google.ar.core.exceptions.UnavailableArcoreNotInstalledException;
 import com.google.ar.core.exceptions.UnavailableDeviceNotCompatibleException;
 import com.google.ar.core.exceptions.UnavailableSdkTooOldException;
 import com.google.ar.core.exceptions.UnavailableUserDeclinedInstallationException;
-
+import com.example.axremulator2.MainActivity;
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
@@ -67,6 +68,7 @@ import com.google.ar.core.exceptions.UnavailableUserDeclinedInstallationExceptio
 //    FlashLightController flashLightController;
 //}
 public class MainActivity extends AppCompatActivity {
+    public static final String TAG= MainActivity.class.getSimpleName();
 
     public Bundle savedInstancestate;
     public Manifest manifest;
@@ -226,12 +228,19 @@ protected void onDrawFrame(SampleRenderer sampleRenderer)
                     displayRotationHelper.updatesessionIfRequired(session);
 
                     backgroundRenderer.updateDisplayGeometry(frame);
-
-
-//                    backgroundRenderer.sessi
                 }
         );
     }
+    try{
+        frame=session.update();
+    }
+        catch(CameraNotAvailableException e){
+            Log.e(TAG,"Camera is Unavailable ",e);
+            messageSnackBarHelper.showError(this,"Camaera Unavailable ,try restarting Application");
+            return;
+
+    }
+    Camera camera=frame.getCamera();
 }    @Override
         protected void showOcclusionDisplayIfRequired() {
             String isDepthSupported = session.isDepthModeSupported(Config.DepthMode.AUTOMATIC)
