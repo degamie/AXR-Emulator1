@@ -36,9 +36,10 @@ import com.example.axremulator2.Common.helpers.CameraPermissionHelper;
 
 import com.example.axremulator2.Common.helpers.SampleRenderer;
 import com.example.axremulator2.Common.helpers.TapHelper;
+import com.example.axremulator2.Common.helpers.Texture;
 import com.example.axremulator2.axr_application.MainBatteryManagement;
 import com.example.axremulator2.databinding.ActivityMainAxractivityBinding;
-import com.google.android.filament.Texture;
+//import com.google.android.Texture;
 import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.Config;
 import com.google.ar.core.Frame;
@@ -154,6 +155,23 @@ public class MainActivity extends AppCompatActivity {
         }
         return display;
     }
+    //Importing Model Texture Config
+    Texture.createFromAsset(
+            render,
+            "models/ship_mdl.png",
+            Texture.WrapMode.CLAMP_TO_EDGE,
+            Texture.COLORFormat.SRGB);
+    Texture.createFromAsset(
+            render,
+            "models/ship_mdl.png",
+            Texture.WrapMode.CLAMP_TO_EDGE,
+            Texture.COLORFormat.SRGB);
+
+            Texture.createFromAsset(
+            render,
+            "models/ship_mdl.png",
+            Texture.WrapMode.CLAMP_TO_EDGE,
+            Texture.COLORFormat.LINEAR);
 
     //        return null;
     @Override
