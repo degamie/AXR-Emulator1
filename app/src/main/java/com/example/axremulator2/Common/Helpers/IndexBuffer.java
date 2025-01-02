@@ -11,5 +11,8 @@ public class IndexBuffer implements Closeable{
         buffer=new GpuBuffer(GLES30.GL_ELEMENT_ARRAY_BUFFER,GpuBuffer.INT_SIZE,entries);
 
     }
+    public int getBufferId(){
+        return gpuBuffer.getBufferId();
+    }
 
 }

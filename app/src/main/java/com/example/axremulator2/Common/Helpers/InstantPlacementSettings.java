@@ -10,6 +10,10 @@ public class InstantPlacementSettings {
     public String SHARED_PREFERENCES_INSTANT_ENABLED="INSTANT_PLACEMENT_SETTINGS_ENABLED";
     public Boolean instantPlacementEnabled=true;
     public SharedPreferences sharedPreferences;
+    public boolean InstantPlacemntSettings=false;
+    public Boolean isInstantPlacemntSettings(){
+        return InstantPlacemntSettings;
+    }
 
     public void onCreate(Context context){
         sharedPreferences=context.getSharedPreferences(SHARED_PREFERENCES_ID,context.MODE_PRIVATE);
