@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 public class DepthSettings {
     public  final String SHARED_PREFERNCES_ID="SHARED_PREFERNCES_OCCLUSIONS_OPTIONS";
     public  final String SHARED_PREFERNCES_SHOW_DEPTH_ENBALE_DIALOG_OOBE="SHARED_PREFERNCES_OCCLUSIONS_OPTIONS";
+    public Boolean depthColorVisualizationEnabled=false;
 public SharedPreferences sharedPreferences;
 public SharedPreferences.Editor editor;
     public Boolean useDepthForOcclusion(){
@@ -19,9 +20,15 @@ public SharedPreferences.Editor editor;
 
         return enable; //TO be Implemented
     }
-    public Boolean shouldShowdepthColorVisualization(){
-        return depthColorVisualization();
+    public boolean depthColorVisualizationEnabled(){
+        return depthColorVisualizationEnabled;
     }
+    public Boolean shouldShowdepthColorVisualization(){
+        return depthColorVisualizationEnabled;
+    }
+
+//        Boolean depthColorVisualizationEnabled=false;
+
     public void DepthEnableDialog(){
     boolean showDialog =SharedPreferences.getBoolean(SHARED_PREFERNCES_ID,SHARED_PREFERNCES_SHOW_DEPTH_ENBALE_DIALOG_OOBE,true);
     if(showDialog){

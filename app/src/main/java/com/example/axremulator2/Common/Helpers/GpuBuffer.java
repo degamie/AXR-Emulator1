@@ -3,6 +3,7 @@ package com.example.axremulator2.Common.helpers;
 import static java.lang.reflect.Array.set;
 
 import android.opengl.GLES30;
+import android.util.Log;
 
 import java.nio.Buffer;
 
@@ -52,6 +53,13 @@ public final int numberOfBytesPerEntry= 0;
                 if(entries.isDirect()){
                     throw new IllegalArgumentException("If non null RuntimeEntries(Buffer Occurs)its a Direct Buffer");
                 }
+            }
+        }
+        public void free(){
+            if(bufferId[0]!=0){
+                GLES30.glDeleteBuffers(1,bufferId,0);
+                GLError.maybeHTrowGLException(Log.WARN,TAG,"Unable to find GlBufferID oBject","GLBufferDelete");
+                bufferId[0]=0;
             }
         }
 
