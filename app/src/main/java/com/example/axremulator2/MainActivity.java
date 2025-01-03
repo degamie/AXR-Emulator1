@@ -52,6 +52,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import com.example.axremulator2.Common.helpers.DisplayRotationHelper;
 import com.example.axremulator2.Common.helpers.*;
+import com.google.ar.core.TrackingFailureReason;
 import com.google.ar.core.TrackingState;
 import com.google.ar.core.exceptions.CameraNotAvailableException;
 import com.google.ar.core.exceptions.UnavailableApkTooOldException;
@@ -259,7 +260,15 @@ protected void onDrawFrame(SampleRenderer sampleRenderer)
 
     }
     Camera camera=frame.getCamera();
-}    @Override
+    String message=null;
+    if(camera.getTrackingState()==TrackingState.PAUSED){
+        if(camera.getTrackingFailureRequest()== TrackingFailureReason.NONE){
+            message=SEARCHING_PLANE_MESSAGE;
+            System.out.println("Successfull AXR Message is Printing "+ message);
+        }
+    }
+}
+@Override
         protected void showOcclusionDisplayIfRequired() {
             String isDepthSupported = session.isDepthModeSupported(Config.DepthMode.AUTOMATIC)
             if (!depthSettings.ShouldshowDepthEnableDialog() || isDepthSupported) {
