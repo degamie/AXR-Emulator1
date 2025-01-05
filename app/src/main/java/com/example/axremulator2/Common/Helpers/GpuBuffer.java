@@ -27,10 +27,7 @@ public final int numberOfBytesPerEntry= 0;
             this.target=target;
             this.numberOfBytesPerEntry=numberofBytesPerEntry;
 
-        if(entries==null){
-            this.size=0;
-            this.capacity=0;
-        }
+        if(entries==null){this.size=0;this.capacity=0;}
         else {
             this.size=entries.limit();
             this.capacity=entries.limit();
@@ -49,12 +46,21 @@ public final int numberOfBytesPerEntry= 0;
             if(entries==null || entries.limit()==0){
                 entries=0;
                 return ;
-
+                if(entries==null || !entries.limit()==0){
+                    int size=0;
+                    return;
+                }
                 if(entries.isDirect()){
                     throw new IllegalArgumentException("If non null RuntimeEntries(Buffer Occurs)its a Direct Buffer");
                 }
+                GLES30.glBindBuffer(target,bufferId[0]);
+                GLError.maybeHTrowGLException("Binding Vertex Groups Not Found!","glBufferId");
+
             }
         }
+//                if(entries==null || !entries.limit()==0)
+
+
         public void free(){
             if(bufferId[0]!=0){
                 GLES30.glDeleteBuffers(1,bufferId,0);
@@ -66,4 +72,5 @@ public final int numberOfBytesPerEntry= 0;
 
     }
 
+    public int getBufferId() {return bufferId;}
 }
