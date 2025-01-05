@@ -326,6 +326,7 @@ protected void onDrawFrame(SampleRenderer sampleRenderer)
 
             }
         }
+        handle(frame,camera);
         public void onSurfaceCreated(SampleRenderer samplerenderer){
             try{
                 PlaneRenderer planeRenderer=new PlaneRenderer();
