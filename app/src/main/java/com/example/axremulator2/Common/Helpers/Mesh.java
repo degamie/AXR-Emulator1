@@ -10,7 +10,11 @@ import android.opengl.GLES30;
 
 import com.google.android.filament.IndexBuffer;
 import com.google.android.filament.VertexBuffer;
+import com.example.axremulator2.Common.helpers.SampleRenderer;
 import android.health.connect.datatypes.units.Length;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class Mesh {
     int [] VertexArrayId=[0];
@@ -36,13 +40,14 @@ public class Mesh {
     private void PrimitiveMode(int glesEnum){
         this.glesEnum=glesEnum;
     }
-    public Mesh(indexBuffer,vertexBuffer,primitiveMode){
+    public Mesh(SampleRenderer sampleRenderer, vertexBuffer, primitiveMode){
         this.indexBuffer=indexBuffer;
         this.vertexBuffer=vertexBuffer;
         this.primitiveMode=primitiveMode;
 
         if(vertexBuffer==null ||  length()==0){
-        try{
+        try{GLES30.glGenVertexArrays(1,VertexArrayId,10);
+            GLError.maybeHTrowGLException("Unable to find the generated Vertex Array");
             GLES30.glBindVertexArray(1,vertexArrayId,0);
             GLError.maybeThrowGLException("AxR Emualtor's Object's GUI Not Found");
 
@@ -63,8 +68,16 @@ public class Mesh {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-
+        public String lowLevelDraw(){
+            if(vertexArrayId[0]==0){
+                throw new IllegalStateException("Draw A Fresshable Mesh on AXR Screen");
+            }
+        }
+}
+public Mesh createFromAsset(SampleRenderer sampleRenderer,String assetFileName)  throws IOException{
+        try(InputStream inputStream=sampleRenderer.getassets().open(assetFileName)){
+            Obj obj=objUtils.convertToRenderable(ObjRender.read(inputStream));
+        }
 
 }
 }

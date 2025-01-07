@@ -1,4 +1,4 @@
-package com.example.axremulator2.Common.helpers;
+ package com.example.axremulator2.Common.helpers;
 
 import static java.lang.reflect.Array.set;
 
@@ -73,4 +73,8 @@ public final int numberOfBytesPerEntry= 0;
     }
 
     public int getBufferId() {return bufferId;}
+
+    public int getSize(GpuBuffer gpuBuffer) {
+        return gpuBuffer.size;
+    }
 }
