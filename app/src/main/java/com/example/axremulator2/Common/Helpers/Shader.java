@@ -24,4 +24,13 @@ public class Shader implements Closeable{
         AssetManager assetManager= renderer.getassets();
         return new Shader();
     }
+    public Shader setDepthWrite(String depthWrite){
+        this.depthWrite=depthWrite();
+
+    }
+    public Shader setCultFace(String CultFace){
+            this.CultFace=CultFace;
+            return this;
+    }
+
 }

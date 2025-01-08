@@ -21,6 +21,8 @@ public class Mesh {
 //    public Length length= new Length();
     private int glesEnum;
     private final int[] vertexArrayId={0};
+    public  int vertexCount=0;
+    public String glesEnum=null;
     public Enum PrimitiveMode{
         POINTS(GLES30.GL_POINTS),
                 LINE_STRIP(GLES30.GL_LINE_STRIP),
@@ -63,6 +65,11 @@ public class Mesh {
             GLES30.glBindVertexArray(vertexArrayId[0]);
             if(indexBuffer!=null){
                 GLES30.glBindBuffer(GLES30.GL_ELEMENT_ARRAY_BUFFER,indexBuffer.setBuffer(vertexArrayId););
+                GLES30.glBindVertexArray(vertexArrayId[0]);
+                if(indexBuffer==null){
+                    vertexCount=vertexBuffer[0].getNumberOfVertex();
+                }
+                GLES30.glDrawArrays(primitiveMode,glesEnum,0,vertexCount);
             }
            // GLError.ma
         } catch (Exception e) {
