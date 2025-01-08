@@ -332,6 +332,8 @@ protected void onDrawFrame(SampleRenderer sampleRenderer)
                 PlaneRenderer planeRenderer=new PlaneRenderer();
                 VirtualSceneFrameBuffer virtualSceneframebuffer=new VirtualSceneFrameBuffer();
                 BackgroundRenderer backgroundRenderer=new BackgroundRenderer();
+                CubemapFilter =new SpecularCubemapFilter(
+                        SampleRenderer ,CUBEMMAP_NUMBER_OF_IMPORTANT_SAMPLES);
             }
         }
     //Intent.ACTION_
@@ -348,7 +350,7 @@ protected void onDrawFrame(SampleRenderer sampleRenderer)
             ImageButton imgbtn=findViewById(R.id.settings_button);
         }
     }
-
+    TrackingStateHelper.updateKeeScreen(Config camera.getTrackableState());
     private void resetSettingsMenuDialogCheckedBoxes() {
     }
 
