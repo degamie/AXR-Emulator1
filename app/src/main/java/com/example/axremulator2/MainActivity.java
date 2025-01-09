@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
     public final float[] ViewLightDirectionMatrix = new float[4];
     public final float[] worldDirectionLight = {0, 0, 0};
     public Camera camera;
+    public SampleRenderer sampleRenderer;
     //    public String message=;
     //New AXR Implementation
     //TorchLight Implementation
@@ -327,18 +328,23 @@ protected void onDrawFrame(SampleRenderer sampleRenderer)
             }
         }
         handle(frame,camera);
-        public void onSurfaceCreated(SampleRenderer samplerenderer){
-            try{
-                PlaneRenderer planeRenderer=new PlaneRenderer();
-                VirtualSceneFrameBuffer virtualSceneframebuffer=new VirtualSceneFrameBuffer();
-                BackgroundRenderer backgroundRenderer=new BackgroundRenderer();
-                CubemapFilter =new SpecularCubemapFilter(
-                        SampleRenderer ,CUBEMMAP_NUMBER_OF_IMPORTANT_SAMPLES);
+        public void onSurfaceCreated(SampleRenderer sampleRenderer){//Surface Created method
+            try {
+                PlaneRenderer planeRenderer = new PlaneRenderer();
+                VirtualSceneFrameBuffer virtualSceneframebuffer = new VirtualSceneFrameBuffer();
+                BackgroundRenderer backgroundRenderer = new BackgroundRenderer();
+                CubemapFilter = new SpecularCubemapFilter(
+                        SampleRenderer, CUBEMMAP_NUMBER_OF_IMPORTANT_SAMPLES);
+                dfgTexture = new Texture(sampleRenderer, Texture.Target.TEXTURE_2D,
+                        Texture.WrapMode.CLAMP_TO_EDGE, false);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
-        }
-    //Intent.ACTION_
+            final int dfgTexture = 64;
+            final int dfgChannel = 2;
+            final int halfChannelFloatSize = 2;
 
-//        @Override
+        }
         protected void onCreate(Bundle savedInstancestate,Switch flashableLightSwitch){
             super.onCreate(savedInstancestate);
             String setContentView=setContentView(R.layout.activity_main_axractivity);
