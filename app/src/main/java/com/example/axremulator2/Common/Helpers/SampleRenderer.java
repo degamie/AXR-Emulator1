@@ -4,12 +4,11 @@ import static android.text.method.TextKeyListener.clear;
 
 import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
+import android.opengl.EGLConfig;
 import android.opengl.GLES30;
 import android.opengl.GLSurfaceView;
 
 import androidx.graphics.opengl.FrameBuffer;
-
-import javax.microedition.khronos.egl.EGLConfig;
 
 public class SampleRenderer {
     public static final String LABEL=SampleRenderer.class.getSimpleName();
@@ -26,17 +25,18 @@ public class SampleRenderer {
         this.assetManager=assetManager;
         glSurfaceView.setPreserveEGLContextOnPause(true);
         glSurfaceView.setEGLContextClientVersion(3);
-        glSurfaceView.setEGLConfigChooser(8,8,8,180);
+        glSurfaceView.setEGLConfigChooser(.8,.8,.8,180);
         GLES30 gles31 = gles30;
         glSurfaceView.setRenderer(
-                new GLSurfaceView.Renderer() {
+                new GLSurfaceView.Renderer( {
                     @Override
-                    public void onSurfaceCreated(GLES30 gl30, EGLConfig eglConfig) {
+                    public void onSurfaceCreated(GLES30 gles30, EGLConfig ) {
                         GLES30.glEnable(GLES30.GL_BLEND);
                         GLES30.glGetError();
                         renderer.onSurfaceCreated(SampleRenderer.this);
                     }
-                }
+                )};
+
         @Override
         public void onSampleRendererr(GLES30 gles30){
 
@@ -54,27 +54,31 @@ public class SampleRenderer {
 
     }
     private void useFrameBuffer(FrameBuffer frameBuffer){
-         int framebufferId;
-         int ViewPortWidth;
-         int ViewPortHeight;
+         int framebufferId= 0;
+         int ViewPortWidth = 0;
+         int ViewPortHeight= 0;
         if(frameBuffer==null){
-            framebufferId=0;
             ViewPortWidth=this.ViewPortWidth;
             ViewPortHeight=this.ViewPortHeight;
         }
             else{
-                framebufferId=frameBuffer.getFrameBufferId();
-                ViewPortWidth=frameBuffer.getViewPortWidth();
-                ViewPortHeight=frameBuffer.getHeight();
+                framebufferId=frameBuffer.getFrameBufferId(framebufferId);
+                ViewPortWidth=frameBuffer.getViewPortWidth(ViewPortWidth);
+                ViewPortHeight=frameBuffer.getViewPortHeight(ViewPortHeight);
             }
+//       String glError= String.valueOf(GLES30.glGetError());
             GLES30.glBindFramebuffer(GLES30.GL_FRAMEBUFFER,framebufferId);
-            GLError.maybeThrownException("Unbale to Find FrameBuffer ","glFindFrameBuffer");
-            GLES30.glViewport(0,0,ViewPortWidth,ViewPortHeight);
-        GLError.maybeThrownGLException("Unbale to Find Dimension's ViePort Settings ","glViewport");
+        GLES30.glGetError("Unbale to Find FrameBuffer ","glFindFrameBuffer");
+        GLES30.glViewport(0,0,ViewPortWidth,ViewPortHeight);
+        GLES30.glGetError(new RuntimeException("Unbale to Find Dimension's ViePort Settings ").printStackTrace();
 
     }
-
-}
+    public void onSurfaceChanged(GLES30 gles30,int w,int h){
+        ViewPortHeight=h;
+        ViewPortWidth=w;
+        renderer.onSurfaceChanged(SampleRenderer.this,w,h);
+    }
+};
 //To ibe IMpemented
 
 //                    @Override
