@@ -1,5 +1,7 @@
 package com.example.axremulator2.Common.helpers;
 import com.example.axremulator2.Common.helpers.SampleRenderer;
+
+import android.media.Image;
 import android.opengl.GLES30;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -12,6 +14,8 @@ import com.google.android.filament.VertexBuffer;
 public class VertexBuffer implements Closeable {
     public FloatBuffer buffer;
     public GpuBuffer gpuBuffer;
+    public Boolean useOCclusion;
+    public float aspectRatio;
     public final int numberOFEntriesPerVertex;
     VertexBuffer(SampleRenderer renderer,int numberOFEntriesPerVertex,FloatBuffer floatBuffer){
         if(numberOFEntriesPerVertex!=null && numberOFEntriesPerVertex.limit() % floatBuffer!=0) throw new IllegalArgumentException{
@@ -38,5 +42,20 @@ public class VertexBuffer implements Closeable {
         }
 
 
+    }
+    public void updateCameraTextureDepth(Image image){
+    GLES30.glBindTexture(GLES30.GL_TEXTURE_2D,CameraTexture.getTextureId());
+    GLES30.glTexImage2D(GLES30.GL_TEXTURE_2D);
+    GLES30.GL_RG8,
+    image.getWidth();
+    image.getHeight(0),
+        GLES30.GL_RG8,
+        GLES30.GL_UNSIGNED_BYTE;
+    image.getPlanes()[0].getBuffer();
+    if(useOCclusion){
+        aspectRatio=(float) image.getWidth()/(float) image.getHeight();
+        OcclusionShader.setFloat("U_Depth_aspect_ratio",aspectRatio);
+        ;
+    }
     }
 }
