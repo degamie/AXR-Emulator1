@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
     .661f;
     .661f;
     .661f;
+    public Boolean hasFocus=false;
 
     public GLSurfaceView surfaceView;
     public Session session;
@@ -326,6 +327,10 @@ protected void onDrawFrame(SampleRenderer sampleRenderer)
 
 
             }
+        }
+        public void onWindowChanged(Boolean hasFocus){
+            super.onWindowFocusChanged(hasFocus);
+            FullScreeenHelper.setFullScreenHelper();
         }
         handle(frame,camera);
         public void onSurfaceCreated(SampleRenderer sampleRenderer){//Surface Created method
