@@ -32,5 +32,11 @@ public class Shader implements Closeable{
             this.CultFace=CultFace;
             return this;
     }
+    public Shader setBlned(BlendFactor rgbBlend,BlendFactor destrgbBlend,BlendFactor destAlphaBlend){
+        this.rgbBlend=rgbBlend;
+        this.destrgbBlend=destAlphaBlend;
+        this.destAlphaBlend=destAlphaBlend;
+        return this;
+    }
 
 }
