@@ -80,7 +80,13 @@ public class Mesh {
                 throw new IllegalStateException("Draw A Fresshable Mesh on AXR Screen");
             }
         }
-}
+}public void lowLwveldraw(){
+        if(vertexArrayId[0]==0){
+            throw new IllegalStateException("tried to make A New Mesh");
+
+        }
+
+    }
 public Mesh createFromAsset(SampleRenderer sampleRenderer,String assetFileName)  throws IOException{
         try(InputStream inputStream=sampleRenderer.getassets().open(assetFileName)){
             Obj obj=objUtils.convertToRenderable(ObjRender.read(inputStream));

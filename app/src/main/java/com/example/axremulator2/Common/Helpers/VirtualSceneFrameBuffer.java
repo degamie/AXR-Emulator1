@@ -1,4 +1,4 @@
 package com.example.axremulator2.Common.helpers;
 
-public class PlaneRenderer {
+public class VirtualSceneFrameBuffer {
 }

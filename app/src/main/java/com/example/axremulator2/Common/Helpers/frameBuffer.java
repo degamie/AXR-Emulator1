@@ -24,6 +24,13 @@ public class frameBuffer {
         }
         resize(width,height);
     }
+    public void onDrawFrame(Mesh mesh,frameBufferId){
+        onDrawFrame(Mesh,frameBufferId)=0;
+    }
+    public String FrameBuffer(){
+        getColorTexture();
+        return colorTexture;
+    }
 }
 //DepthTexture=new Texture(
 //                    SampleRenderer renderer,

@@ -15,4 +15,7 @@ public class GLError {
 
     private static String formatErrorMessages(String reason, String api, List<Integer> errorCodes) {
     }
+
+    public static void maybeHTrowGLException() {
+    }
 }

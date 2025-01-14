@@ -38,5 +38,10 @@ public class Shader implements Closeable{
         this.destAlphaBlend=destAlphaBlend;
         return this;
     }
+    public <Uniform> void setTexture(String name, String texture, String location){
+        location=getUniformLocation(name);
+        Uniform uniform=(Uniform).get(texture);
+    }
+
 
 }
