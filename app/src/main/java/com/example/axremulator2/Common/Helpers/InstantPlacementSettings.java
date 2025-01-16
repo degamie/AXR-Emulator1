@@ -26,4 +26,10 @@ public class InstantPlacementSettings {
     public void setInstantPlacementEnabled(Boolean enabled){
         if(enabled=instantPlacementEnabled){return;}
     }
+    InstantPlacementSettings =enable;
+    SharedPreferences.Editor editor=SharedPreferences.edit();
+    editor.putBoolean()SHARED_PREFERENCES_INSTANT_PLACEMENT_ENABLED,InstantPlacementSettings.class);
+    editor.apply();
 }
+
+
