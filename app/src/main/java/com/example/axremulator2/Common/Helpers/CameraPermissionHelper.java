@@ -1,5 +1,7 @@
 package com.example.axremulator2.Common.helpers;
 
+import static android.provider.Settings.System.getString;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,9 +11,13 @@ import androidx.core.content.ContextCompat;
 
 //import com.example.axremulator2.Manifest;
 import android.Manifest;
+import android.graphics.Camera;
 import android.net.Uri;
-import android.provider.Settings;;
+import android.provider.Settings;
+import android.util.Log;;import com.example.axremulator2.R;
+
 public class CameraPermissionHelper {
+    public String CameraId=null;
     private static final int CAMERA_PERMISSION_CODE=0;
     private static final String CAMERA_PERMISSION= Manifest.permission.CAMERA;
     public Boolean hasCameraPermission(Activity activity){
@@ -30,7 +36,19 @@ public class CameraPermissionHelper {
         intent.setData(Uri.fromParts("Package",activity.getPackageName(),null));
         activity.startActivity(intent);
     }
-    public static void handleCameraPermission(Activity activity){}
+    public static void CameraOpenSafe(Activity activity,String cameraId){
+        boolean isCameraOpen=false;
+        try{
+            releaseCameraAndPreview();
+            Camera camera=IsCameraOpen(cameraId);
+            isCameraOpen=(Camera!=null);
+        }
+        catch(Exception e){
+            Log.e(getString(R.string.app_name),"Unable to Open the Camera");
+            e.printStackTrace();
+        }
+        return isCameraOpen;
+    }
 }
 //        intent(intent);
 //        intent.startActivity(intent);
