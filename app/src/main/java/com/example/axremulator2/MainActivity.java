@@ -55,6 +55,7 @@ import com.example.axremulator2.Common.helpers.*;
 import com.google.ar.core.TrackingFailureReason;
 import com.google.ar.core.TrackingState;
 import com.google.ar.core.exceptions.CameraNotAvailableException;
+import com.google.ar.core.exceptions.NotYetAvailableException;
 import com.google.ar.core.exceptions.UnavailableApkTooOldException;
 import com.google.ar.core.exceptions.UnavailableArcoreNotInstalledException;
 import com.google.ar.core.exceptions.UnavailableDeviceNotCompatibleException;
@@ -70,10 +71,12 @@ import com.example.axremulator2.MainActivity;
 //    FlashLightController flashLightController;
 //}
 public class MainActivity extends AppCompatActivity {
+    public BackgroundRenderer backgroundRenderer;
+
     public static final String TAG= MainActivity.class.getSimpleName();
 
     public Bundle savedInstancestate;
-    public Manifest manifest;
+    public Manifest manifonResumeest;
     public static float Z_NEAR = .15f;
     public static float Z_FAR = 150f;
     public static int CUBEMMAP_RESOLUTION = 17;
@@ -263,6 +266,15 @@ protected void onDrawFrame(SampleRenderer sampleRenderer)
     }
     Camera camera=frame.getCamera();
     String message=null;
+    if(camera.getTrackingState().Tracking && (depthSettings.useDepthForOcclusion() || depthSettings.depthSettings.depthColorVisualizationEnabled()){
+        try{
+            (Image dephImage==frame.acquireCameraImage16Bits()){
+                backgroundRenderer.updateCameraDepthTexture(depthImage);
+            }
+        }carhc(NotYetAvailableException e){
+            throw new IllegalStateException("Texture Not found");
+    }
+    }
     if(camera.getTrackingState()==TrackingState.PAUSED){
         if(camera.getTrackingFailureRequest()== TrackingFailureReason.NONE){
             message=SEARCHING_PLANE_MESSAGE;
@@ -270,6 +282,7 @@ protected void onDrawFrame(SampleRenderer sampleRenderer)
         }
     }
 }
+
 @Override
         protected void showOcclusionDisplayIfRequired() {
             String isDepthSupported = session.isDepthModeSupported(Config.DepthMode.AUTOMATIC)
