@@ -42,6 +42,21 @@ public class Shader implements Closeable{
         location=getUniformLocation(name);
         Uniform uniform=(Uniform).get(texture);
     }
+    public Shader vect2(String name,float[] val){
+        if(val.length!=2){
+            throw new IllegalArgumentException("Array's value must be 2 ");
+        }
+    }
+    public Shader vect3(String name,float[] val){
+        if(val.length!=3){
+            throw new IllegalArgumentException("Array's value must be 3");
+        }
+    }
+    public Shader vect4(String name,float[] val){
+        if(val.length!=4){
+            throw new IllegalArgumentException("Array's value must be 4");
+        }
+    }
 
 
 }

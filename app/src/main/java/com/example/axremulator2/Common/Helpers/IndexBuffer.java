@@ -17,5 +17,8 @@ public class IndexBuffer implements Closeable{
     public int getSize(){
         return gpuBuffer.getSize();
     }
+    public void setFree(){
+        gpuBuffer.free();
+    }
 
 }
