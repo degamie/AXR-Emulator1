@@ -1,5 +1,7 @@
 package com.example.axremulator2;
 
+import static java.lang.reflect.Array.setFloat;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Camera;
@@ -372,6 +374,13 @@ protected void onDrawFrame(SampleRenderer sampleRenderer)
             Image depthSettings=depthSettings.getPlanes(surfaceView);
             Instant InstantPlacementSettings=InstantPlacementSettings(surfaceView);
             ImageButton imgbtn=findViewById(R.id.settings_button);
+            SunlightShader=Shader.createfromAssets(
+                    SampleRenderer,
+                    "Shaders/Sun.vert",
+                    "Shaders/SunLight.vert"
+            );
+                    .setVect4("u_color",31.0f,255.0f,188.0f,255.0f,210.0f);
+            .setFloat("u_sunlight,5.0");
         }
     }
     TrackingStateHelper.updateKeeScreen(Config camera.getTrackableState());
