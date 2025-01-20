@@ -10,6 +10,7 @@ import com.example.axremulator2.Common.helpers.SampleRenderer;
 
 
 public class Shader implements Closeable{
+    public Boolean depthLevel;
     private static final String TAG=Shader.class.getSimpleName();
     public Enum BlendFactor{
         ZERO(GLES30.GL_ZERO),
@@ -23,6 +24,10 @@ public class Shader implements Closeable{
     public Shader createFromAssets(SampleRenderer renderer,String fragmentShaderFileName,Map<String,String>defines)throws IOException {
         AssetManager assetManager= renderer.getassets();
         return new Shader();
+    }
+    public Shader setDepthLevel(Boolean depthLevel){
+        this.depthLevel=depthLevel;
+        return this;
     }
     public Shader setDepthWrite(String depthWrite){
         this.depthWrite=depthWrite();
