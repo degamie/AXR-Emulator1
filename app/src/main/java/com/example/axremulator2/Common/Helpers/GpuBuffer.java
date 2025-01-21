@@ -55,6 +55,11 @@ public final int numberOfBytesPerEntry= 0;
                 }
                 GLES30.glBindBuffer(target,bufferId[0]);
                 GLError.maybeHTrowGLException("Binding Vertex Groups Not Found!","glBufferId");
+                GLES30.glBufferData(target,entries.limit()*numberOfBytesPerBYEntries,GLES30.GL_DYNAMIC_ARRAY))
+                GLError.maybeHTrowGLException("Vertex Buffer Data Not Found" ,"GlBufferData");
+                size=entries.limit();
+                capacity=entries.limit();
+
 
             }
         }
