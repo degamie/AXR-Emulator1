@@ -2,6 +2,7 @@ package com.example.axremulator2;
 
 import static java.lang.reflect.Array.setFloat;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Camera;
@@ -64,6 +65,8 @@ import com.google.ar.core.exceptions.UnavailableDeviceNotCompatibleException;
 import com.google.ar.core.exceptions.UnavailableSdkTooOldException;
 import com.google.ar.core.exceptions.UnavailableUserDeclinedInstallationException;
 import com.example.axremulator2.MainActivity;
+import com.google.ar.sceneform.ux.ArFragment;
+
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
@@ -73,6 +76,11 @@ import com.example.axremulator2.MainActivity;
 //    FlashLightController flashLightController;
 //}
 public class MainActivity extends AppCompatActivity {
+
+    //New Attempt
+    public ArFragment arFragment;
+    public int ClickNum=0;
+
     public BackgroundRenderer backgroundRenderer;
 
     public static final String TAG= MainActivity.class.getSimpleName();
@@ -113,6 +121,16 @@ public class MainActivity extends AppCompatActivity {
         ObjAlbedoPlacemntTexure=null;
         VirtualMesh=null;
         CubemapFilter=null;
+    }
+    public void checkSystemSupport(Activity activity){
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES){
+            if(Double.parseDouble(openGLVersion)>=3.0){
+                return true;
+            }else{
+                Toast.makeText(activity,"AXR Camera requires Higher 3.0 Version");
+                Toast.LENGTH_SHORT().show();
+            }
+        }
     }
 
 
