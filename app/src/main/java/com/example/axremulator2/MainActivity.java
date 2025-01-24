@@ -384,24 +384,29 @@ protected void onDrawFrame(SampleRenderer sampleRenderer)
 
         }
         protected void onCreate(Bundle savedInstancestate,Switch flashableLightSwitch){
-            super.onCreate(savedInstancestate);
-            String setContentView=setContentView(R.layout.activity_main_axractivity);
-            surfaceView= surfaceView.findViewById(R.id.surfaceview);
-            GLSurfaceView.Renderer render=new GLSurfaceView.Renderer();
-            installReq=false;
-            Image depthSettings=depthSettings.getPlanes(surfaceView);
-            Instant InstantPlacementSettings=InstantPlacementSettings(surfaceView);
-            ImageButton imgbtn=findViewById(R.id.settings_button);
-            SunlightShader=Shader.createfromAssets(
-                    SampleRenderer,
-                    "Shaders/Sun.vert",
-                    "Shaders/SunLight.vert"
-            );
-                    .setVect4("u_color",31.0f,255.0f,188.0f,255.0f,210.0f);
-            .setFloat("u_sunlight,5.0");
-        }
-    }
-    TrackingStateHelper.updateKeeScreen(Config camera.getTrackableState());
+            //Newer Implementations
+            if(CheckSystemSupport(this)){
+                arCamera=(ArFragment)getSupportFragmentManager().findFragmentById(R.id.arCameraArea);
+            }
+            //Older Implementations
+            //super.onCreate(savedInstancestate);
+//            String setContentView=setContentView(R.layout.activity_main_axractivity);
+//            surfaceView= surfaceView.findViewById(R.id.surfaceview);
+//            GLSurfaceView.Renderer render=new GLSurfaceView.Renderer();
+//            installReq=false;
+//            Image depthSettings=depthSettings.getPlanes(surfaceView);
+//            Instant InstantPlacementSettings=InstantPlacementSettings(surfaceView);
+//            ImageButton imgbtn=findViewById(R.id.settings_button);
+//            SunlightShader=Shader.createfromAssets(
+//                    SampleRenderer,
+//                    "Shaders/Sun.vert",
+//                    "Shaders/SunLight.vert"
+//            );
+//                    .setVect4("u_color",31.0f,255.0f,188.0f,255.0f,210.0f);
+//            .setFloat("u_sunlight,5.0");
+//        }
+//    }
+//    TrackingStateHelper.updateKeeScreen(Config camera.getTrackableState());
     private void resetSettingsMenuDialogCheckedBoxes() {
     }
 
