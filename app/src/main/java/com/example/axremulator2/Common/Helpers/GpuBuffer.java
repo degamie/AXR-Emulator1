@@ -1,5 +1,6 @@
  package com.example.axremulator2.Common.helpers;
 
+import static com.google.common.io.ByteStreams.limit;
 import static java.lang.reflect.Array.set;
 
 import android.opengl.GLES30;
@@ -42,7 +43,15 @@ public final int numberOfBytesPerEntry= 0;
 
         }
         }
-        public set(Buffer buffer){
+        public void set(Buffer buffer){
+            //Determining the Vertex buffer Obj nd id
+            if(entries.limit()<=capacity){
+                GLES30.glBufferData(target,0,entries.limit()*numberofBytesPerEntry);
+                GLError.maybeHTrowGLException("Unable to find VertexBufferObj");
+                int size=entries.limit();
+            }
+
+
             if(entries==null || entries.limit()==0){
                 entries=0;
                 return ;
