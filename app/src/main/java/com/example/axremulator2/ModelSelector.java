@@ -9,5 +9,9 @@ public class ModelSelector {
     public void onAddModel(Anchor anchor, ModelRenderable modelRenderable){
         AnchorNode anchorNode=new AnchorNode();
         anchorNode.setParent(arCam.getArSceneView().getScene());
+        TransformableModel transformableModel=new TransformableModel(arCam.getTransformationSystem());
+        transformableModel.setParent(anchorNode);
+        transformableModel.setRenderable(modelRenderable);
+        transformableModel.select();
     }
 }
