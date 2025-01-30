@@ -1,4 +1,4 @@
-package com.example.axremulator2.Common.helpers;
+package com.example.axremulator2.Old_PCKGS.helpers;
 
 import static android.provider.Settings.System.getString;
 
@@ -12,12 +12,24 @@ import androidx.core.content.ContextCompat;
 //import com.example.axremulator2.Manifest;
 import android.Manifest;
 import android.graphics.Camera;
+import android.hardware.camera2.CameraCharacteristics;
+import android.hardware.camera2.CameraDevice;
+import android.hardware.camera2.CameraManager;
 import android.net.Uri;
 import android.provider.Settings;
 import android.util.Log;;import com.example.axremulator2.R;
 
-public class CameraPermissionHelper {
-    public String CameraId=null;
+public class CameraPermissionHelper extends CameraManager {
+    public String CameraId=null;CameraCharacteristics cameraCharacteristics=new CameraCharacteristics.Key<CameraId,CameraManager>();
+    //starting Camera
+    public void OnStartCamera(Camera camera,CameraManager cameraManager,String CameraId){
+        super.OnStartCamera();
+        cameraCharacteristics.getCameracharacterstics();
+        return CameraDevice.CameraDeviceSetup(CameraId);
+
+    }
+
+
     private static final int CAMERA_PERMISSION_CODE=0;
     private static final String CAMERA_PERMISSION= Manifest.permission.CAMERA;
     public Boolean hasCameraPermission(Activity activity){
