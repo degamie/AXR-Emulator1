@@ -15,11 +15,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.compose.runtime.Anchor;
 
+import com.example.axremulator2.ModelSelector.ModelSelector;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 
 import java.util.Objects;
 
-public class MainActivity extends ModelSelector{
+public class MainActivity extends ModelSelector {
     @Override
     public void onAddModel(Anchor anchor, ModelRenderable modelRenderable) {
         super.onAddModel(anchor, modelRenderable);
