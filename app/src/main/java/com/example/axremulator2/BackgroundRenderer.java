@@ -19,7 +19,7 @@ public class BackgroundRenderer {
 
     public void draw(@NonNull Frame frame, Boolean debugShowDepthMap){//draw func t declare
         if(frame.hasDisplayGeometryChanged()){//frame display changed
-            frame.transformCoordinates2d(Coordinates2d.OPENGL_NORMALIZED_DEVICE_COORDINATES),//cheking the OpenGlNormalized foms
+            frame.transformCoordinates2d(Coordinates2d.OPENGL_NORMALIZED_DEVICE_COORDINATES);,//cheking the OpenGlNormalized foms
             //To be implemented
         }
     }
