@@ -1,5 +1,7 @@
 package com.example.axremulator2.ModelSelector;
 
+import android.content.Context;
+
 import androidx.compose.runtime.Anchor;
 
 import com.google.ar.core.ArCoreApk;
@@ -12,8 +14,10 @@ public class ModelSelector extends ModelRenderable{
     public XRSession xrSession;
     ArCoreApk arCoreApk;
     Camera  arcam;
+    ModelRenderable.Builder.setSource(
+    Context context,R.raw.renderable.build());
     public String OnInit(){
-        super.getRenderPriority();
+        super.getRenderPriority() ;
         return arcam+=renderable;
     }
 
