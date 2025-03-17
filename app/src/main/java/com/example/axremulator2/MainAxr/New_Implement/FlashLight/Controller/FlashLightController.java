@@ -14,13 +14,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.axremulator2.MainAxr.CameraPermissionHelepr.CameraPermissionLayer;
 import com.google.ar.core.Camera;
 
 import java.io.IOException;
 import java.lang.reflect.Parameter;
 import  android.hardware.Camera.Parameters;
 
-public class FlashLightController extends//FlashLightController class declare
+public class FlashLightController extends CameraPermissionLayer{//FlashLightController class declare
     public String cameraId=null;
     public CameraManager cameraManager;
     public CameraDevice cameraDevice;
