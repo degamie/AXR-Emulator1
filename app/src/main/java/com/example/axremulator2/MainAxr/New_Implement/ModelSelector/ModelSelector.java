@@ -21,10 +21,12 @@ public class ModelSelector extends ModelRenderable{
         super.getRenderPriority() ;
         return arcam+=renderable;
     }
-    public ModelRenderable(arcam,arCoreApk,xrSession){
-        this.arcam=arcam;
+    public ModelRenderable(arcam,arCoreApk,xrSession){//Modelrenderable Funct Declare
+        this.arcam=arcam;//Binding the Varibales
         this.arCoreApk=arCoreApk;
         this.xrSession=xrSession;
+        if(arcam==xrSession)  return xrSession;//printing XRSession's ARCam
+            else return arcam;//Printing ARCamera
     }
     public void onAddModel(Anchor anchor, ModelRenderable modelRenderable){
         if (xrSession.getSpatialCapabilities.hasCapabilities(SpatialCapabilities.SPATIAL_CAPABILITY_3D_CONTENT)) {
