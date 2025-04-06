@@ -1,0 +1,96 @@
+ package com.example.axremulator2.Common.helpers;
+
+import static com.google.common.io.ByteStreams.limit;
+
+import android.opengl.GLES30;
+import android.util.Log;
+
+import java.nio.Buffer;
+import com.example.axremulator2.Common.helpers.GLError;
+
+ public class GpuBuffer {
+    private static String TAG=GpuBuffer.class.getSimpleName();
+    private final int  capacity=0;
+    private final int  size=0;
+    private final int  bufferId=0;
+    public int INT_SIZE=4;
+    public int FLOAT_SIZE=4;
+    private  int  target;
+public final int numberOfBytesPerEntry= 0;
+    public GpuBuffer(target, int numberofBytesPerEntry, Buffer entries, int numberOfBytesPerBYEntries){
+        if(entries!=null){
+            if(!entries.isDirect()){
+                throw new IllegalArgumentException("if non-null entriesBuffer must be direct Buffer");
+            }
+            if(entries.limit()==0){
+                entries=null;
+            }
+            this.target=target;
+            this.numberOfBytesPerEntry=numberofBytesPerEntry;
+
+        if(entries==null){this.size=0;this.capacity=0;}
+        else {
+            this.size=entries.limit();
+            this.capacity=entries.limit();
+        }
+        try{
+            GLES30.glBindVertexArray(0);
+            GLError.maybeHTrowGLException("Failed to Throw Unbinding Vertex Array","glBIndVertexArray");
+            GLES30.glGenBuffers(1,bufferId,0);
+            GLError.maybeHTrowGLException("Failed to Unbind The Genederated Buffers" ,"glGenBuffera");
+            GLES30.glBindBuffer(target,bufferId[0]);
+            GLError.maybeHTrowGLException("Failed to Throw Buffer Object","glBindBuffer");
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        }
+        public void set(Buffer buffer){
+            //Determining the Vertex buffer Obj nd id
+            if(entries.limit()<=capacity){
+                GLES30.glBufferData(target,0,entries.limit()*numberofBytesPerEntry);
+                GLError.maybeHTrowGLException("Unable to find VertexBufferObj");
+                int size=entries.limit();
+            }
+
+
+            if(entries==null || entries.limit()==0){
+                entries=0;
+                return ;
+                if(entries==null || !entries.limit()==0){
+                    int size=0;
+                    return;
+                }
+                if(entries.isDirect()){
+                    throw new IllegalArgumentException("If non null RuntimeEntries(Buffer Occurs)its a Direct Buffer");
+                }
+                GLES30.glBindBuffer(target,bufferId[0]);
+                GLError.maybeHTrowGLException("Binding Vertex Groups Not Found!","glBufferId");
+                GLES30.glBufferData(target,entries.limit()*numberOfBytesPerBYEntries,GLES30.GL_DYNAMIC_ARRAY))
+                com.example.axremulator2.Common.helpers.GLError.maybeHTrowGLException("Vertex Buffer Data Not Found" ,"GlBufferData");
+                size=entries.limit();
+                capacity=entries.limit();
+
+
+            }
+        }
+//                if(entries==null || !entries.limit()==0)
+
+
+        public void free(){
+            if(bufferId[0]!=0){
+                GLES30.glDeleteBuffers(1,bufferId,0);
+                GLError.maybeHTrowGLException(Log.WARN,TAG,"Unable to find GlBufferID oBject","GLBufferDelete");
+                bufferId[0]=0;
+            }
+        }
+
+
+    }
+
+    public int getBufferId() {return bufferId;}
+
+    public int getSize(GpuBuffer gpuBuffer) {
+        return gpuBuffer.size;
+    }
+}
