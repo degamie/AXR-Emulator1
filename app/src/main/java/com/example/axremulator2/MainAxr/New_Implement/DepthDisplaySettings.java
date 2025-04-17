@@ -10,6 +10,12 @@ public class DepthDisplaySettings {
     public XRType xrType;// OBj declare
     public XRSpace xrSpace;
     public XRTime xrTime;
+    public void setLightLightEstimation(xrType,xrSpace,xrTime){//Setting Light estimation
+        this.xrTime=xrTime;//Binding XRtime
+        this.xrSpace=xrSpace;//Binding XRSpace
+        this.xrTime=xrTime;//Binding XRTime
+
+    }
     public String getLightLightEstimation(xrType,xrSpace,xrTime){//Fetching Light estimation
         return xrType+xrSpace+xrTime;
     }
