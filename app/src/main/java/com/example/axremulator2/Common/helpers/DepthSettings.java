@@ -7,6 +7,9 @@ public class DepthSettings {
     public  final String SHARED_PREFERNCES_SHOW_DEPTH_ENBALE_DIALOG_OOBE="SHARED_PREFERNCES_OCCLUSIONS_OPTIONS";
     public Boolean depthColorVisualizationEnabled=false;
 public SharedPreferences sharedPreferences;
+public String getSharedPreferences(SharedPreferences sharedPreferences){
+    return sharedPreferences;
+}
 public SharedPreferences.Editor editor;
     public Boolean useDepthForOcclusion(){
         return useDepthForOcclusion();
