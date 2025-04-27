@@ -13,6 +13,9 @@ public class BackgroundRenderer {
     public static final String LABEL =BackgroundRenderer.class.getSimpleName();
     public  final String CAMERA_VERTEX_SHADER_NAME="shaders/screenquad.vert";
     public final String CAMERA_FRAGMENT_SHADER_NAME="shaders/screenquad.frag";
+    public String getCAMERA_FRAGMENT_SHADER_NAME(String CAMERA_FRAGMENT_SHADER_NAME){
+        return CAMERA_FRAGMENT_SHADER_NAME;
+    }
     public static final Integer  COORDS_BUFFER_SIZE=2*4*4;
     public static final FloatBuffer NDC_QUAD_COORDS=ByteBuffer.allocateDirect(Integer.parseInt(COORDS_BUFFER_SIZE)).order(ByteOrder.nativeOrder()).asFloatBuffer();
     public static final FloatBuffer VIRTUAL_SCENE_TEXTURE=ByteBuffer.allocateDirect(Integer.parseInt(COORDS_BUFFER_SIZE)).order(ByteOrder.nativeOrder()).asFloatBuffer();
