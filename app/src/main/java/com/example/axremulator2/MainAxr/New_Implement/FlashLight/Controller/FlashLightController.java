@@ -1,4 +1,4 @@
-package com.example.axremulator2.MainAxr.FlashLight.Controller;
+package com.example.axremulator2.MainAxr;
 
 import static android.hardware.camera2.CameraMetadata.FLASH_MODE_TORCH;
 import static android.os.Build.VERSION_CODES.R;
@@ -14,23 +14,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.axremulator2.MainAxr.CameraPermissionHelepr.CameraPermissionLayer;
 import com.google.ar.core.Camera;
 
 import java.io.IOException;
 import java.lang.reflect.Parameter;
 import  android.hardware.Camera.Parameters;
 
-public class FlashLightController extends CameraPermissionLayer{//FlashLightController class declare
-    public String cameraId=null;
-    public CameraManager cameraManager;
-    public CameraDevice cameraDevice;
-    public Camera camera=new Camera();//Camera obj Declare
+public class FlashLightController {//FlashLightController class declare
     public SurfaceTexture texture;
     public Button Lightonn,lightoff;//Lights btn declare
+    public Camera camera=new Camera();//Camera obj Declare
     public Parameters p;//Parameters declare
-
-
+    public String cameraId=null;
+    CameraManager cameraManager;
+    CameraDevice cameraDevice;
     public void EnableExtenrnalFlashLightAENode(){
         if(Build.VERSION.SDK_INT>=28 && isExternalFlashAemodeAvailable()){
             try{
@@ -44,6 +41,12 @@ public class FlashLightController extends CameraPermissionLayer{//FlashLightCont
         Lightonn.setOnClickListener(new View.OnClickListener() {//Seting the FlashlighList Onlick Listener
             @Override
             public void onClick(View view) {flashSwitch(true);}});//returning the OnClicking the flashLight
+
+        lightoff = finalize(R.id.lightoff);//turning off the FlashLight
+        lightoff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {flashSwitch(false)}});//Swiching off the Camera's FlashLight
+
     }
     public void flashSwitch(Boolean input){//FlashLight Feature
         if(this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)){//getPackageManager Fetaure declare
@@ -67,13 +70,7 @@ public class FlashLightController extends CameraPermissionLayer{//FlashLightCont
         catch(IOException e){
             e.printStackTrace();
         }
-        if(input)camera.getTrackingState(true);//StartPreview Declare
+            if(input)camera.getTrackingState(true);//StartPreview Declare
         else{Toast.makeText("FlashLight Not found",Toast.LENGTH_SHORT().show());}//printing the flashlight's exception
     }
 }
-
-//        lightoff = finalize(R.id.lightoff);//turning off the FlashLight
-//        lightoff.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {flashSwitch(false)}});//Swiching off the Camera's FlashLight
-
