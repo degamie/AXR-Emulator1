@@ -17,6 +17,9 @@ import com.example.axremulator2.Common.helpers.GLError;
     public int FLOAT_SIZE=4;
     private  int  target;
 public final int numberOfBytesPerEntry= 0;
+public String getCapacity(int Capacity){
+    return Capacity;
+}
     public GpuBuffer(target, int numberofBytesPerEntry, Buffer entries, int numberOfBytesPerBYEntries){
         if(entries!=null){
             if(!entries.isDirect()){
@@ -70,8 +73,6 @@ public final int numberOfBytesPerEntry= 0;
                 com.example.axremulator2.Common.helpers.GLError.maybeHTrowGLException("Vertex Buffer Data Not Found" ,"GlBufferData");
                 size=entries.limit();
                 capacity=entries.limit();
-
-
             }
         }
 //                if(entries==null || !entries.limit()==0)
