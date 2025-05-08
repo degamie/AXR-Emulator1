@@ -16,6 +16,9 @@ import com.example.axremulator2.Common.helpers.GLError;
     public int INT_SIZE=4;
     public int FLOAT_SIZE=4;
     private  int  target;
+    public String getTarget(int target){
+        return target;
+    }
 public final int numberOfBytesPerEntry= 0;
 public String getCapacity(int Capacity){
     return Capacity;
