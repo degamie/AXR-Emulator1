@@ -24,6 +24,9 @@ public class FlashLightController {//FlashLightController class declare
     public SurfaceTexture texture;
     public Button Lightonn,lightoff;//Lights btn declare
     public Camera camera=new Camera();//Camera obj Declare
+    public String getCamera(Camera camera){
+        return camera;
+    }
     public Parameters p;//Parameters declare
     public String cameraId=null;
     CameraManager cameraManager;
