@@ -8,6 +8,8 @@ import androidx.xr.runtime.Session;
         public  XRSession xrsession;///Obj declare
         public Integer xrDisplay=xrsession.show();//Display method declare
         xrDisplay+=flashLightController;//Incr XRDispay with flashLightController's Light
+        public Integer xrDisplay(int xrDisplay){return  xrDisplay;}//Fetching XRDisplay
+
     }
 public class XRSession extends Activity {//XR Session inheriting Activity
     public Session session;//Session obj declare
