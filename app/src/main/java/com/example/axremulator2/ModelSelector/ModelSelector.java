@@ -23,6 +23,7 @@ public class ModelSelector extends ModelRenderable{
         return arCoreApk;
     }
     Camera  arcam;
+    public String getCamera(Camera arcam){return arcam;}
     ModelRenderable.Builder.setSource(
     Context context,R.raw.renderable.build());
     public String OnInit(){
