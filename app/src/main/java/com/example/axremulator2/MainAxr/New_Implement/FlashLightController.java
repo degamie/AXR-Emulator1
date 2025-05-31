@@ -1,82 +1,122 @@
-package com.example.axremulator2.MainAxr.FlashLight.Controller;
+package com.example.axremulator2.Common.helpers;
 
-import static android.hardware.camera2.CameraMetadata.FLASH_MODE_TORCH;
-import static android.os.Build.VERSION_CODES.R;
+import com.example.axremulator2.MainActivity;
+import static android.app.ProgressDialog.show;
+import static android.content.Context.CAMERA_SERVICE;
+import static android.content.pm.PackageManager.FEATURE_CAMERA_ANY;
+
+import static com.example.axremulator2.R.id.FlashLightEnableOn;
 
 import android.content.pm.PackageManager;
-import android.graphics.SurfaceTexture;
-import android.hardware.camera2.CameraDevice;
+import android.graphics.Camera;
+import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
-import android.hardware.camera2.CaptureRequest;
-import android.os.Build;
+//import android.health.connect.datatypes.units.Length;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
-import com.example.axremulator2.MainAxr.CameraPermissionHelepr.CameraPermissionLayer;
-import com.google.ar.core.Camera;
-
-import java.io.IOException;
-import java.lang.reflect.Parameter;
-import  android.hardware.Camera.Parameters;
-
-public class FlashLightController extends CameraPermissionLayer{//FlashLightController class declare
-    public String cameraId=null;
+import com.example.axremulator2.MainActivity;
+import com.example.axremulator2.R;
+//
+//import java.util.List;
+public class FlashLightController extends CameraPermissionHelper{
+    public MainActivity mainActivity;
+    public Long CameraId=null;
+    public CameraPermissionHelper cameraPermissionHelper;
+    public DisplayRotationHelper displayRotationHelper;
+    public Object surfaceView;
+    public TapHelper tapHelper;
+    public ToggleButton toggle_flashlightbtn= toggle_flashlightbtn.findViewById(FlashLightEnableOn);
     public CameraManager cameraManager;
-    public CameraDevice cameraDevice;
-    public Camera camera=new Camera();//Camera obj Declare
-    public SurfaceTexture texture;
-    public Button Lightonn,lightoff;//Lights btn declare
-    public Parameters p;//Parameters declare
-    public String getCameraDevice(CameraDevice cameraDevice){
-        return cameraDevice;
+    public String getCameraid;
+//    public Switch  flashableLightSwitch=R.id.surfaceview(FlashLightEnableOn);
+    public String getCameraMamnager(CameraManager cameraManager.Integer cameraId){    //fetching CameraManager
+        if(cameraId==0)return 0;//Base Cond
+        while(cameraId!=0){//iterating through CameraId
+            if(cameraId>0){//Checking CameraId's Greater Val
+                cameraId+=cameraManager.showCamera();//Showing Cameraid
+            }else cameraId=0;//CameraId 's Initial Val Declare
+        }return cameraId;//Printing CameraId
     }
 
+    public Integer getCameraid(Integer CameraId) throws CameraAccessException {
+            if(CameraId!=null) {CameraId=CameraManager.getCameraIdList(CameraId);}
+            else {
+                CameraId=-1;
+        }
+            return CameraId;
+    }
 
-    public void EnableExtenrnalFlashLightAENode(){
-        if(Build.VERSION.SDK_INT>=28 && isExternalFlashAemodeAvailable()){
+    public int setContentView(int contentView) {
+        this.setContentView(contentView);
+        return contentView;
+    }
+    protected void OnCreate(Bundle SavedInstanceState,Switch flashableLightSwitch){
+//    Switch flashableLightSwitch;
+
+    CameraManager cameraManager=cameraManager.openCamera(cameraPermissionHelper.this);
+    flashableLightSwitch=R.id.surfaceview(FlashLightEnableOn);
+    if(cameraPermissionHelper.hasCameraPermission(FEATURE_CAMERA_ANY || (PackageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)))){
+            displayRotationHelper=new DisplayRotationHelper(this);
+        }
+        else {
+            Toast.makeText(mainActivity,CAMERA_SERVICE+"Device without Camera",Toast.LENGTH_SHORT);
+        }
+        setContentView(R.layout.activity_main_axractivity);
+        surfaceView=R.id.findById(R.id.surfaceview);
+        displayRotationHelper=new DisplayRotationHelper(displayRotationHelper);
+        TapHelper tapHelper;
+        flashableLightSwitch.setEnabled(true);
+        Toast FlashLightCamera=Toast.makeText(mainActivity.this,"Camera has FlashLight",Toast.LENGTH_SHORT).show();
+        Switch finalFlashableLightSwitch = flashableLightSwitch;
+        flashableLightSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (compoundButton.isChecked()) {
+                    try {
+                        cameraManager.setTorchMode("0", false);
+                    } catch (CameraAccessException e) {
+                        e.printStackTrace();
+                        finalFlashableLightSwitch.setText("Flash Tuned ONN");
+                    }
+                }
+                    else {
+                        finalFlashableLightSwitch.setText("Flash Tuned OFF");
+                    }
+
+                }
+
+        });
+    }
+
+    //Exceptional Handling
+
+    public void TorchLightToggleFlash(View view){
+        if(toggle_flashlightbtn.isChecked()){
             try{
-                CaptureRequest.Builder builder=camera.createCaptureRequest(cameraDevice.TEMPLATE_PREVIEW);
+                cameraManager.setTorchMode(getCameraid,true){
+                    Toast flashLightIsTunredOnn = Toast.makeText(mainActivity.this, "FlashLight is Tunred Onn");
+                    Toast.LENGTH_SHORT().show();
+                }
+            }
+            catch (CameraAccessException e){
+                e.printStackTrace();
+            }
+        }
+      else{
+          try{
+                cameraManager.setTorchMode(getCameraid,true){
+                  Toast flashLightIsTunredOff=Toast.makeText(MainActivity.this,"FlashLight is Tunred Off");
+                  int lengthShort = Toast.LENGTH_SHORT;
+                }
+            }
+            catch (CameraAccessException e){
+                e.printStackTrace();
             }
         }
     }
-    public void onCreate(Bundle InstanceState) {//Creating BundleInstances
-        //Newer implementation
-        Lightonn = finalize(R.Id.lightonn);//finding LightPrewview
-        Lightonn.setOnClickListener(new View.OnClickListener() {//Seting the FlashlighList Onlick Listener
-            @Override
-            public void onClick(View view) {flashSwitch(true);}});//returning the OnClicking the flashLight
-    }
-    public void flashSwitch(Boolean input){//FlashLight Feature
-        if(this.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)){//getPackageManager Fetaure declare
-            p.setFlashLightMode(camera.getDisplayOrientedPose(),FLASH_MODE_TORCH);//FlashLight's Eanbling
-            camera.setParameters(p);//Setting Camera Parameters
-            SurfaceTexture surfaceTexture=new SurfaceTexture();//SurfaceTexture Object Declare
-            camera.setPreviewTexture (Texture);//Previewing CameraTexture
-        }
-        try{
-            cameraId= cameraManager.getCameraIdList()[0];
-            else Camera camera1=camera.open();
-            camera.Parameters p= camera1.getParameters();
-            p.setFlashMode(torch);
-            camera1.setParameters(p);
-            SurfaceTexture surfaceTexture=new SurfaceTexture(0);
-
-        }
-        try{
-            camera.getImageIntrinsics(texture);
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-        if(input)camera.getTrackingState(true);//StartPreview Declare
-        else{Toast.makeText("FlashLight Not found",Toast.LENGTH_SHORT().show());}//printing the flashlight's exception
-    }
 }
-
-//        lightoff = finalize(R.id.lightoff);//turning off the FlashLight
-//        lightoff.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {flashSwitch(false)}});//Swiching off the Camera's FlashLight
-
