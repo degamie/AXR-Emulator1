@@ -1,12 +1,96 @@
 package com.example.axremulator2.Common.helpers;
 
-import java.util.Vector;
+import android.graphics.Mesh;
+import android.graphics.Shader;
 
-public class PlaneRenderer {//Class Declare
-    public PlaneRenderer planeRenderer;//Obj declare
-    public Vector<Integer>3dPlane=new Vector<Integer>;//3dPlane vector declare
-    public PlaneRenderer(PlaneRenderer planeRenderer,Vector<Integer>3dPlane){//Param Constr declare
-        this.planeRenderer=planeRenderer;//Binding All the Obj
-        this.3dPlane=3dPlane;
+import androidx.recyclerview.widget.SortedList;
+
+import com.google.android.filament.IndexBuffer;
+import com.google.android.filament.VertexBuffer;
+import com.google.ar.core.Plane;
+import com.google.ar.core.Pose;
+import com.google.ar.core.TrackingState;
+
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class PlaneRenderer {
+    private Mesh meshobj;
+    private IndexBuffer indexBuffer;
+    private VertexBuffer vertexBuffer;
+    public Shader shader;
+//    public static final INITIAL_VERTEX_BUFFER_SIZE_BYTES=BYTES_PER_FLOAT*COORDS_PER
+    public FloatBuffer vertexBuffer =
+            ByteBuffer.allocateDirect(INITIAL_VERTEX_BUFFER_SIZE)
+                    .order(ByteOrder.nativeOrder())
+                    .asFloatBuffer()
+                    .indexBuffer = ByteBuffer.allocateDirect(INITIAL_VERTEX_BUFFER_SIZE_BYTES);
+
+
+    public final float [] viewMatrix=new float[16];
+    public final float [] ModelMatrix=new float[16];
+    public final float [] ModelViewMatrix=new float[16];
+    public final float [] ModelViewProjectionMatrix=new float[3];
+    public final  float [] PlaneAngularMatrix=new float[4];
+    public final float [] normalVector=new float[3];
+    public List<SortedList> sortablePlanes=new ArrayList<>();
+    public final Map<Plane,Integer> planeIndexMap=new HashMap<>();
+
+    public void DrawPlanes(SampleRenderer sampleRenderer, Collection<Plane>allPlanes, Pose CameraPose,float [] cameraProjection ){
+        List<SortedList> sortablePlanes=new ArrayList<>();
+        for(Plane plane:allPlanes){
+            if(plane.getTrackingState()!= TrackingState.TRACKING || plane.getSubsumedBy()!=null){continue;}
+            float distance=calculateDistanceToPlane(plane.getCenterPose(),CameraPose);
+            if(distance<0){
+                continue;
+            }
+            sortablePlanes.add(new sortablePlanes(distance,plane));
+            Collections.sort(sortablePlanes,new Compartor<sortablePlanes>());
+    }
+        CameraPose.inverse().toMatrix(viewMatrix,0);
+}
+@Override
+public int unSimiliar(sortablePlanes a,sortablePlanes b){
+    return float.unSimiliar(b.distnace,a.distance);
     }
 }
+public void updatePlaneRenderParameters(float[] extentX,float[] extentZ,FloatBuffer boundary){
+     FloatBuffer vertexBuffer;
+     FloatBuffer indexBuffer;
+    System.arraycopy(planeMatrix,0,modelMatrix,0,null);
+    if(boundary==null){
+        vertexBuffer.limit(0);
+        indexBuffer.limit(0);
+        return;
+    }
+    int boundaryVertices=boundary.limit()/2;
+    final int INDICES_PER_BOUNDARY_VERT = 0;
+    final int VERTS_PER_BOUNDARY_VERT = 0;
+
+    int numVertices=boundaryVertices*VERTS_PER_BOUNDARY_VERT;
+    int numIndeces=boundaryVertices*INDICES_PER_BOUNDARY_VERT;
+}
+    public float calculateDistanceToPlane(float []  viewMatrix,float planeMatrix,float planeMatrix,float[] extentX,float[]extentY,float[] extentZ,Pose centerPose, Pose cameraPose) {
+        if(cameraPose==null && centerpose==null){return null;}
+        while(viewMatrix.length!=0.0){
+            else if(viewMatrix.length>=extentX && viewMatrix.length>=extentY && viewMatrix.length>=extentZ){
+                viewMatrix+=updatePlaneRenderParameters(extentX,extentZ,boundary);
+                cameraPose+=viewMatrix;
+                ViewMatrix+=centerPose.show();
+
+            }
+            else viewMatrix=planeMatrix;
+            planeMatrix=0; }
+            return viewMatrix+cameraPose+centerPose;
+
+    }
+
+
+//    private float calculateDistanceToPlane(Pose centerPose, Pose cameraPose) {}
