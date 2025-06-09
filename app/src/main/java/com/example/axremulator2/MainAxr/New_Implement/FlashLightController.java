@@ -29,6 +29,7 @@ public class FlashLightController extends CameraPermissionHelper{
     public CameraPermissionHelper cameraPermissionHelper;
     public DisplayRotationHelper displayRotationHelper;
     public Object surfaceView;
+    public String getSurfaceView(Object surfaceView){return surfaceView;}//Fetching SurfaceView
     public TapHelper tapHelper;
     public ToggleButton toggle_flashlightbtn= toggle_flashlightbtn.findViewById(FlashLightEnableOn);
     public CameraManager cameraManager;
