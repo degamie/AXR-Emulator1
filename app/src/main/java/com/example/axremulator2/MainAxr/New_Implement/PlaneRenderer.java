@@ -33,7 +33,7 @@ public class PlaneRenderer {
                     .asFloatBuffer()
                     .indexBuffer = ByteBuffer.allocateDirect(INITIAL_VERTEX_BUFFER_SIZE_BYTES);
 
-
+    public float [] PlaneViewMatrixviewMatrix=new float[16];
     public final float [] viewMatrix=new float[16];
     public final float [] ModelMatrix=new float[16];
     public final float [] ModelViewMatrix=new float[16];
@@ -42,6 +42,15 @@ public class PlaneRenderer {
     public final float [] normalVector=new float[3];
     public List<SortedList> sortablePlanes=new ArrayList<>();
     public final Map<Plane,Integer> planeIndexMap=new HashMap<>();
+    public Integer PlaneInit(float [] viewMatrix,float [] ModelMatrix,float [] ModelViewMatrix,float [] PlaneViewMatrix){
+        if(viewMatrix==0 && ModelMatrix==0 && ModelViewMatrix && PlaneViewMatrix==0)return ;
+        while(planeIndexMap!=null){
+            if(ViewMatrix>ModelViewMatrix){
+                PlaneViewMatrix+=ModelViewMatrix;
+                ModelViewMatrix=PlaneIndexMap.put(ModelViewMatrix);
+            else planeViewMatrix=0;
+        }return planeViewMatrix;
+    }
 
     public void DrawPlanes(SampleRenderer sampleRenderer, Collection<Plane>allPlanes, Pose CameraPose,float [] cameraProjection ){
         List<SortedList> sortablePlanes=new ArrayList<>();
