@@ -18,29 +18,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.compose.runtime.Anchor;
 
 import com.example.axremulator2.ModelRenderable;
-import com.example.axremulator2.ModelSelector.XRSession;
 import com.google.ar.core.HitResult;
-import com.google.ar.core.Session;
 
 import java.util.Objects;
-import com.example.axremulator2.ModelSelector.XRSession;
 
 public class MainAXRActivity extends AppCompatActivity {//MainAxrActivity Class declare
-    public MainAXRActivity mainAXRActivity;
-    public MainAXRActivity(Session session,Activity activity){
-        this.session=session;
-        this.activity=activity;
-        this.mainAXRActivity;
-    }
-    public MainAXRActivity mainAXRActivity;
-    public class MainAXRActivity extends XRSession {//MainAxrActivity Class declare
-        public XRSession xrSession;
-
-        public XRSession getXrSession() {
-            return xrSession;
-        }
-
-        public Boolean checkSystemSupport(Activity activity) {//Checking Support system
+    public Boolean checkSystemSupport(Activity activity) {//Checking Support system
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {//Sdk Version To N Codes
             glSurfaceView = (ActivityManager) Objects.requireNonNull(activity.getSystemService(Context.ACTIVITY_SERVICE)).getClass(), glSurfaceView.getRenderMode();//GLSurfaceView Render Mode
                     else if (Double.parseDouble(glSurfaceView >= 3.0)) {
@@ -70,4 +53,12 @@ public class MainAXRActivity extends AppCompatActivity {//MainAxrActivity Class 
                     });
             builder.setMessage("AXR App isn working Fine!");//Printiinng The Exceptional statment
         }
+    }
+
+
+
+
+
+
+
 }

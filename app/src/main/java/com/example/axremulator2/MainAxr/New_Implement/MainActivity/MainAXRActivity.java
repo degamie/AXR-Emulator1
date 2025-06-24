@@ -1,4 +1,4 @@
-package com.example.axremulator2.MainAxr;
+package com.example.axremulator2.MainAxr.MainActivity;
 
 import static android.os.Build.VERSION_CODES.R;
 import static com.google.ar.schemas.sceneform.SceneformBundleDef.addModel;
@@ -9,8 +9,6 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.os.Build;
-import android.os.Bundle;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -23,7 +21,6 @@ import com.google.ar.core.HitResult;
 import com.google.ar.core.Session;
 
 import java.util.Objects;
-import com.example.axremulator2.ModelSelector.XRSession;
 
 public class MainAXRActivity extends AppCompatActivity {//MainAxrActivity Class declare
     public MainAXRActivity mainAXRActivity;
@@ -32,8 +29,10 @@ public class MainAXRActivity extends AppCompatActivity {//MainAxrActivity Class 
         this.activity=activity;
         this.mainAXRActivity;
     }
+}
+public class MainAXRActivity extends XRSession {
     public MainAXRActivity mainAXRActivity;
-    public class MainAXRActivity extends XRSession {//MainAxrActivity Class declare
+
         public XRSession xrSession;
 
         public XRSession getXrSession() {
