@@ -1,4 +1,4 @@
-package com.example.axremulator2.ModelSelector.CameraPermissionHelepr;
+package com.example.axremulator2.Model.CameraPermissionHelepr;
 
 import static androidx.core.app.ActivityCompat.startActivityForResult;
 

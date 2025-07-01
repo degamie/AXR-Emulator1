@@ -1,6 +1,6 @@
 package com.example.wirelesschargingapplication;
 
-import com.example.wirelesschargingapplication.axr.AXR_Application.app.src.main.java.com.example.axr_application.BatteryReciever;
+import com.example.axremulator2.Model.BatteryReciever;
 
 public class Reciever extends BatteryReciever {
     public Reciever reciever;

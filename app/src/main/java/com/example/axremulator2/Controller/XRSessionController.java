@@ -1,4 +1,4 @@
-package com.example.axremulator2.ModelSelector;
+package com.example.axremulator2.Model;
 
 import android.app.Activity;
 

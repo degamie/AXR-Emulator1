@@ -18,12 +18,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.compose.runtime.Anchor;
 
 import com.example.axremulator2.ModelRenderable;
-import com.example.axremulator2.ModelSelector.XRSession;
+import com.example.axremulator2.Model.XRSession;
 import com.google.ar.core.HitResult;
 import com.google.ar.core.Session;
 
 import java.util.Objects;
-import com.example.axremulator2.ModelSelector.XRSession;
 
 public class MainAXRActivity extends AppCompatActivity {//MainAxrActivity Class declare
     public MainAXRActivity mainAXRActivity;

@@ -1,4 +1,4 @@
-package com.example.wirelesschargingapplication.axr.AXR_Application.app.src.main.java.com.example.axr_application;
+package com.example.axremulator2.Model;
 
 import static androidx.compose.ui.semantics.SemanticsPropertiesKt.setText;
 
@@ -11,23 +11,33 @@ import android.widget.TextView;
 
 import com.example.wirelesschargingapplication.axr.AXR_Application.app.src.main.java.com.example.axr_application.BatterySimulator.BatteryWireless;
 import com.example.wirelesschargingapplication.axr.AXR_Application.app.src.main.java.com.example.axr_application.BroadCastReciever;
+@Getter
+@Setter
+@AllParamsContructor
+@NoParamsContructor
 
 public class BatteryReciever  extends BroadCastReciever {//BatteryReciever class inherititing BroadCastReciever
     //Obj and Variables Declare
+    @Id
+    @GeneratedValue(strategy=GENERATIONTYPE.IDENTITY)
+    @Column(unique=true,nullable=false)
     public Context context;
+    @Column(unique=false,nullable=true)
     public Integer mBatteryLevel;
     public TextView textView;
+    @Column(unique=false,nullable=true)
     public String  networkInfo=null;
+    @Column(unique=false,nullable=true)
     public ConnectivityManager connectivityManager = null;
     public BatteryReciever batteryReciever;
-    public void setmBatteryLevel(Integer mBatteryLevel){this.mBatteryLevel=mBatteryLevel;}//Binding BatteryLevel
-    public BatteryReciever(){//Default Const
-        return;
-    }
+//    public void setmBatteryLevel(Integer mBatteryLevel){this.mBatteryLevel=mBatteryLevel;}//Binding BatteryLevel
+//    public BatteryReciever(){//Default Const
+//        return;
+//    }
 
-    public String getBatterylevel(int Batterylevel){//Fetchinh Batterylevel
-        return Batterylevel;
-    }
+//    public String getBatterylevel(int Batterylevel){//Fetchinh Batterylevel
+//        return Batterylevel;
+//    }
     public String onInit(connectivityManager,networkInfo){
         if(networkInfo==null)return null;
         while(networkInfo!=null){
@@ -53,9 +63,6 @@ public class BatteryReciever  extends BroadCastReciever {//BatteryReciever class
         }
         return mBatteryLevel;
     }
-
-
-
     @Override
     public String onReciever(Context context, Intent intent) {
         return super.onReciever(context, intent);

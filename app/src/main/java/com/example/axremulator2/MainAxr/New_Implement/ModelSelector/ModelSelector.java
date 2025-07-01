@@ -9,7 +9,7 @@ import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.Camera;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.rendering.ModelRenderable;
-import com.example.axremulator2.ModelSelector.XRSession;
+import com.example.axremulator2.Model.XRSession;
 public class ModelSelector extends ModelRenderable{
     public ModelRenderable renderable;
     public XRSession xrSession;

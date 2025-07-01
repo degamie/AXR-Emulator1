@@ -1,4 +1,4 @@
-package com.example.axremulator2.ModelSelector;
+package com.example.axremulator2.Model;
 
 import android.content.Context;
 
@@ -8,7 +8,7 @@ import com.google.ar.core.ArCoreApk;
 import com.google.ar.core.Camera;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.rendering.ModelRenderable;
-import com.example.axremulator2.ModelSelector.XRSession;
+
 public class ModelSelector extends ViewModel{
     public ViewModel(
         MyRepository MyRepository;
