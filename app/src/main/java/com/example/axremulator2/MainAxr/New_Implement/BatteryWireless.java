@@ -11,19 +11,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wirelesschargingapplication.R;
 
-import javax.annotation.processing.Generated;
+import java.awt.Button;
 
+import javax.annotation.processing.Generated;
+import java.awt.Button;
 @Getter
 @Setter
 @AllParamsContructor
 @NoParamsContructor
 public class BatteryWireless extends AppCompatActivity {
     @Id
-            @GeneratedValue(strategy=GENERATIONTYPE.IDENTITY)
+    @GeneratedValue(strategy=GENERATIONTYPE.IDENTITY)
     @Column(unique=true,nullable=false)
-    TextView textWifiInfo;
+    public String wifiId;
     @Column(unique=true,nullable=false)
-    Button btnInfo;
+    public String TextView textWifiInfo;
+    @Column(unique=true,nullable=false)
+    public  btnInfo;
     public String gettextWifiInfo(TextView textWifiInfo){//Fetching textWifiInfo
         return textWifiInfo;
     }
