@@ -1,13 +1,25 @@
 package com.example.axremulator2.Common.helpers;
 
+@Getter
+@Setter
+@AllParamsConstructor
+@NoParamsConstructor
+
 public class GpuBuffer {//Class Declare
+    @Id
+    @GeneratedValue(strategy=GENERATIONTYPE.IDENTITY)
+    @Column(unique=true,nullable=false)
+    public float size;
+    @Column(unique=false, nullable=true)
     public GpuBuffer gpubuffer;//Obj declare
-    public GpuBuffer(GpuBuffer gpubuffer){
-        this.gpubuffer=gpubuffer;
-    }
-    public static Object INT_SIZE() {}//tbc//
-    public Object FLOAT_SIZE() {
-        Float size=0.0;
+    @Column(unique=false, nullable=true)
+    public Object FLOAT_SIZE(float size) {
+        size=0;
         return  size;
     }
 }
+
+//    public GpuBuffer(GpuBuffer gpubuffer){
+//        this.gpubuffer=gpubuffer;
+//    }
+//    public static Object INT_SIZE() {}//tbc//
