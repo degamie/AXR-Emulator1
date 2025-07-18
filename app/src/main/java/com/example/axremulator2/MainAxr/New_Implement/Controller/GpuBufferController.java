@@ -1,6 +1,6 @@
 package com.example.axremulator2.MainAxr.New_Implement.Controller;
 
-import com.example.axremulator2.Service.GpuBufferService;
+import com.example.axremulator2.MainAxr.New_Implement.Service.GpuBufferService;
 
 @Controller
 

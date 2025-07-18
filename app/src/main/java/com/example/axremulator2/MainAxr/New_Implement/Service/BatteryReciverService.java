@@ -1,6 +1,4 @@
-package com.example.axremulator2.Service;
-
-import com.example.axremulator2.Repository.BatteryReciever;
+package com.example.axremulator2.MainAxr.New_Implement.Service;
 
 @Service
 public class BatteryReciverService {

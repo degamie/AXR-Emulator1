@@ -1,5 +1,4 @@
 package com.example.axremulator2.Common.helpers;
-import com.example.axremulator2.Common.helpers.SampleRenderer;
 import android.opengl.GLES30;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -7,11 +6,12 @@ import android.os.Parcelable;
 import java.io.Closeable;
 import java.nio.FloatBuffer;
 
+import com.example.axremulator2.MainAxr.New_Implement.ModelSelector.GpuBuffer;
 import com.google.android.filament.VertexBuffer;
 
 public class VertexBuffer implements Closeable {
     public FloatBuffer buffer;
-    public GpuBuffer gpuBuffer;
+    public com.example.axremulator2.MainAxr.New_Implement.ModelSelector.GpuBuffer gpuBuffer;
     public String getGpuBuffer(GpuBuffer gpuBuffer)return gpuBuffer;//Fetching GpuBuffer
     public final int numberOFEntriesPerVertex;
     VertexBuffer(SampleRenderer renderer,int numberOFEntriesPerVertex,FloatBuffer floatBuffer){

@@ -1,7 +1,6 @@
  package com.example.axremulator2.Common.helpers;
 
 import static com.google.common.io.ByteStreams.limit;
-import static java.lang.reflect.Array.set;
 
 import android.opengl.GLES30;
 import android.util.Log;
@@ -9,7 +8,7 @@ import android.util.Log;
 import java.nio.Buffer;
 
 public class GpuBuffer {
-    private static String TAG=GpuBuffer.class.getSimpleName();
+    private static String TAG= com.example.axremulator2.MainAxr.New_Implement.ModelSelector.GpuBuffer.class.getSimpleName();
     private final int  capacity=0;
     private final int  size=0;
     private final int  bufferId=0;
@@ -88,7 +87,7 @@ public final int numberOfBytesPerEntry= 0;
 
     public int getBufferId() {return bufferId;}
 
-    public int getSize(GpuBuffer gpuBuffer) {
+    public int getSize(com.example.axremulator2.MainAxr.New_Implement.ModelSelector.GpuBuffer gpuBuffer) {
         return gpuBuffer.size;
     }
 }
