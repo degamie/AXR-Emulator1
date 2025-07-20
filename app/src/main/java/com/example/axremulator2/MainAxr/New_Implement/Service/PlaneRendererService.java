@@ -81,4 +81,8 @@ public     PlaneRendererIRepository planeRendererIRepository;
         return viewMatrix + cameraPose + centerPose;
 
     }
+    public String setAllBYViewMatrix(float[] VIewMatrix){
+        return  planeRendererIRepository.findAllBYViewMatrix(VIewMatrix);
+    }
+
 }

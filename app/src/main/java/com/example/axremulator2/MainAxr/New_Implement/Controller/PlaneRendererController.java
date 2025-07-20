@@ -12,4 +12,9 @@ public class PlaneRendererController {
     public String getAllBYIndexBuffer(@PathVariable ("IndexBuffer")String IndexBuffer, @RequestBody PlaneRenderer){
         return planeRendererService.getAllBYIndexBuffer(IndexBuffer);//fetching Indx Buffer in Server
     }
+    @PostMapping("/findAll/{ViewMatrix}")
+    public String setAllBYViewMatrix(float[] VIewMatrix){
+        return  planeRendererService.setAllBYViewMatrix(VIewMatrix);
+    }
+
 }

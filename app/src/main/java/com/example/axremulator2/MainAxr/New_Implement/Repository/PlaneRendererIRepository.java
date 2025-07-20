@@ -9,5 +9,6 @@ public interface PlaneRendererIRepository extends JpaRepository<PlaneRenderer,St
     public PlaneRenderer planeRenderer;
 
     public String saveAllBYIndexBuffer(String IndxBuffer);
+    public String findAllBYViewMatrix(float[] VIewMatrix);
 
 }
