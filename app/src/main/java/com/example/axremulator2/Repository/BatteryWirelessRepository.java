@@ -6,4 +6,5 @@ import com.example.axremulator2.Old_PCKGS.helpers.axr_application.BatteryWireles
 public interface BatteryWirelessRepository extends JpaRepository<BatteryWireless,String> {
     public String saveAllBytextWifiInfo(String textWifiInfo);
     public String findAllBytextWifiInfo(String textWifiInfo);
+    public String saveAllByBtnInfo(String btnInfo);
 }
