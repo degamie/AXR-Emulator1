@@ -8,7 +8,9 @@ public class BatteryWirelessController {
     public BatteryWirelessService batteryWirelessService;
     public String getTextWifiInfo(String textWifiInfo){
         return batteryWirelessService.getTextWifiInfo(textWifiInfo);
-
+    }
+    public String getAllByBtnInfo(String btnInfo){
+        return batteryWirelessService.getAllByBtnInfo(btnInfo);
     }
 
 }

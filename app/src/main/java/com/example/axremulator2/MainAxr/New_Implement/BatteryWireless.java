@@ -27,7 +27,7 @@ public class BatteryWireless extends AppCompatActivity {
     @Column(unique=true,nullable=false)
     public String TextView textWifiInfo;
     @Column(unique=true,nullable=false)
-    public  btnInfo;
+    public String btnInfo;
     public String gettextWifiInfo(TextView textWifiInfo){//Fetching textWifiInfo
         return textWifiInfo;
     }

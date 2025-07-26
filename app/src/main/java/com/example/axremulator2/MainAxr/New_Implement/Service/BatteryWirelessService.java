@@ -6,8 +6,10 @@ import com.example.axremulator2.MainAxr.New_Implement.Repository.BatteryWireless
 public class BatteryWirelessService {
     @Autowired
     public BatteryWirelessRepository batteryWirelessRepository;
-    public String getTextWifiInfo(String textWifiInfo){
+    public String getTextWifiInfo(String textWifiInfo) {
         return batteryWirelessRepository.saveAllBytextWifiInfo(textWifiInfo);
-
+    }
+    public String getAllByBtnInfo(String btnInfo){
+        return batteryWirelessRepository.saveAllByBtnInfo(btnInfo);
     }
 }

@@ -5,14 +5,16 @@ import android.opengl.GLES30;
 import androidx.graphics.opengl.FrameBuffer;
 
 import com.google.android.filament.Texture;
-import com.example.axremulator2.Common.helpers.SampleRenderer;
+import com.example.axremulator2.Common.helpers.frameBufferRepository;
 @Service
 public class frameBufferService {
     @Autowired
-    public frameBufferRepository frameBufferrepository;
+    public com.example.axremulator2.Common.helpers.frameBufferRepository  frameBufferrepository;
     public String getframeBufferId(Long FrameBufferId){
-        return frameBufferRepository.saveAll(FrameBufferId);
-
+        return frameBufferrepository.saveAll(FrameBufferId);
+    }
+    public String getAllframeBufferName(String frameBufferName){
+        return  frameBufferrepository.saveAllframeBufferName(frameBufferName);
     }
 
 }

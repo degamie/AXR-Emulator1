@@ -6,10 +6,16 @@ import androidx.graphics.opengl.FrameBuffer;
 
 import com.google.android.filament.Texture;
 import com.example.axremulator2.Common.helpers.SampleRenderer;
-@Service
-public class frameBuffer {
-    public static final String TAG= FrameBuffer.class.getSimpleName();
-    public final int [] frameBufferId={0};
+import com.example.axremulator2.Common.helpers.rameBufferService;
+@Component
+@Controller
+public class FrameBufferController {
+    public   FrameBufferController frameBufferController=new FrameBufferController();
+    @Autowired
+    public FrameBufferService frameBufferService;
+    public String getAllBufferName(String BufferName){
+        return frameBufferService.getAllframeBufferName(BufferName)
+    }
 
 }
 //DepthTexture=new Texture(
