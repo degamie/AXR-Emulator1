@@ -10,8 +10,9 @@ import java.util.List;
 
 @Repository
 
-public interface BatteryReciever  extends JpaRepository<BatteryReciever,String> {//BatteryReciever class inherititing BroadCastReciever
+public interface BatteryRecieverRepository  extends JpaRepository<BatteryReciever,String> {//BatteryReciever class inherititing BroadCastReciever
 
     public List<BatteryReciever> saveAll();
+    public String saveAllByNetworkInfo(String networkInfo);
 }
 
