@@ -12,5 +12,8 @@ public class BatteryWirelessController {
     public String getAllByBtnInfo(String btnInfo){
         return batteryWirelessService.getAllByBtnInfo(btnInfo);
     }
-
+    @PostMapping("/find/{BatteryType}")
+    public String setAllByBatteryType(String BatteryType){
+        return batteryWirelessService.findAllByBatteryType(BatteryType);
+    }
 }
