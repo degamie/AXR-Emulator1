@@ -1,4 +1,4 @@
-package com.example.axremulator2.Old_PCKGS.helpers.axr_application;
+package com.example.axremulator2.MainAxr;
 
 import static android.content.Intent.ACTION_BATTERY_CHANGED;
 import static android.os.Build.VERSION_CODES.R;
@@ -39,7 +39,7 @@ import retrofit2.Retrofit;
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class MainBatteryManagement extends AppCompatActivity {
+public final class MainBatteryManagement extends AppCompatActivity {
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
