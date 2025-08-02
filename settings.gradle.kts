@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "AXREmulator2"
+rootProject.name = "AXR Emulator Application"
 include(":app")
  
