@@ -12,4 +12,7 @@ public class BatteryWirelessService {
     public String getAllByBtnInfo(String btnInfo){
         return batteryWirelessRepository.saveAllByBtnInfo(btnInfo);
     }
+    public String findAllByBatteryType(String BatteryType){
+        return batteryWirelessRepository.findAllByBatteryType(BatteryType);
+    }
 }
