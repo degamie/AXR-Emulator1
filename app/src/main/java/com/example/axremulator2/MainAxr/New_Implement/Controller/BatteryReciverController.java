@@ -9,4 +9,9 @@ public class BatteryReciverController {//Controller Class Declare
     public String GetAll(){//fetching All Req. Data
         return batteryRecieverService.saveAll();//Saving All BatteryReciverServices
     }
+        @PostMapping("/findAll/{networkInfo}")
+        public String setAllByNetworkInfo(String networkInfo){// NetworkInfo's Retreival
+        return batteryRecieverService.setAllByNetworkInfo(networkInfo);
+    }
+
 }
