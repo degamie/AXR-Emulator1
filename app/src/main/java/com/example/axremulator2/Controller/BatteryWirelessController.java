@@ -16,4 +16,8 @@ public class BatteryWirelessController {
     public String setAllByBatteryType(String BatteryType){
         return batteryWirelessService.findAllByBatteryType(BatteryType);
     }
+    @GetMapping("/saveAll/{BatteryConnectStatus}")
+        public String getAllByBatteryConnectStatus(String BatteryConnectStatus){
+        return batteryWirelessService.saveAllByBatteryConnectStatus(BatteryConnectStatus);//Fetching BatteryStatusConnetStatus
+     }
 }
