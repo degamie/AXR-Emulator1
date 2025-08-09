@@ -15,4 +15,7 @@ public class BatteryWirelessService {
     public String findAllByBatteryType(String BatteryType){
         return batteryWirelessRepository.findAllByBatteryType(BatteryType);
     }
+     public String getAllByBatteryConnectStatus(String BatteryConnectStatus){
+        return batteryWirelessRepository.saveAllByBatteryConnectStatus(BatteryConnectStatus);//Fetching BatteryStatusConnetStatus
+     }
 }
