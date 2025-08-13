@@ -5,8 +5,7 @@ import android.opengl.GLES30;
 import androidx.graphics.opengl.FrameBuffer;
 
 import com.google.android.filament.Texture;
-import com.example.axremulator2.Common.helpers.SampleRenderer;
- import com.example.axremulator2.Common.helpers.VirtualSceneFrameBuffer;
+import com.example.axremulator2.MainAxr.New_Implement.ModelSelector.VirtualSceneFrameBuffer;
 
 import java.util.List;
 
@@ -18,6 +17,7 @@ public class frameBufferRepository extends JpaRepository<VirtualSceneFrameBuffer
     public List<VirtualSceneFrameBuffer> saveAll();
     public String getframeBufferId(Long FrameBufferId);
     public String saveAllframeBufferName(String frameBufferName);
+    public String findAllByFrameBufferName(String frameBufferName);
 }
 //DepthTexture=new Texture(
 //                    SampleRenderer renderer,
