@@ -16,6 +16,10 @@ public class FrameBufferController {
     public String getAllBufferName(String BufferName){
         return frameBufferService.getAllframeBufferName(BufferName)
     }
+    @PostMapping("/findAll/BufferName")//Retriving BufferName in Server
+    public String setAllBufferName(String BufferName){
+        return frameBufferService.setAllframeBufferName(BufferName)
+    }
 
 }
 //DepthTexture=new Texture(

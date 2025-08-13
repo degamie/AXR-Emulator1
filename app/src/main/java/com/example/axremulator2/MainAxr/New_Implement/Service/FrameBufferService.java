@@ -16,6 +16,9 @@ public class frameBufferService {
     public String getAllframeBufferName(String frameBufferName){
         return  frameBufferrepository.saveAllframeBufferName(frameBufferName);
     }
+    public String setAllByFrameBufferName(String frameBufferName){
+           return frameBufferrepository.findAllByFrameBufferName(frameBufferName);
+    }
 
 }
 //DepthTexture=new Texture(
