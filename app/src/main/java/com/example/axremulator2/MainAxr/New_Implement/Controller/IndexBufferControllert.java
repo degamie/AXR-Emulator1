@@ -1,3 +1,4 @@
+
 package com.example.axremulator2.MainAxr.New_Implement.Controller;
 
 import com.example.axremulator2.Common.helpers.IndexBufferRepository;
@@ -10,6 +11,10 @@ public class IndexBufferController{//Controller Claas Declare
     @GetMapping("/saveAll/{bufferSize}")
     public String getAllByBufferSize (Integer bufferSize){// fetching Buffer Size
         return indexBufferService.getAllByBufferSize(bufferSize);
+    }
+    @GetMapping("/saveAll/{IndexBufferNumber}")//Fetching IndexBufferNumber
+    public String saveAllByIndexNumber(String BufferNumber){
+        return indexBufferRepository.saveAll(BufferNumber);
     }
 
 }

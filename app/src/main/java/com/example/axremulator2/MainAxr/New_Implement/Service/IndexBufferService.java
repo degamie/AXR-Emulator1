@@ -10,5 +10,8 @@ public class IndexBufferService {
     public String getAllByBufferSize (Integer bufferSize){
         return indexBufferRepository.saveAllByBufferSize(bufferSize);
     }
+    public String saveAllByIndexNumber(String BufferNumber){
+        return indexBufferRepository.saveAll(BufferNumber);
+    }
 
 }
