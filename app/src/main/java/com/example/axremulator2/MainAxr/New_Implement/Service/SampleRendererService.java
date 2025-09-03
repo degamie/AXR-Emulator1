@@ -10,5 +10,8 @@ public class SampleRendererService {
    public String getAllRenderer(int Renderer){
        return samplerenderRepository.saveAll(Renderer);
    }
+    public String getAllByViewPortHeight(Integer ViewPortHeight){
+       return  samplerenderRepository.saveAllByViewPortHeight(ViewPortHeight);
+    }
 
 }

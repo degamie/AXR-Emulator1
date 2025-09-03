@@ -4,12 +4,15 @@ import com.example.axremulator2.Common.helpers.SampleRenderer;
 import com.example.axremulator2.MainAxr.New_Implement.Service.SampleRendererService;
 
 @Controller
-public interface SampleRendererController{
+public class SampleRendererController{
    @Autowired
    public SampleRendererService samplerenderService;
    @GetMapping("/saveAll/{Renderer}")
     public String getAllRenderer(int Renderer){
         return samplerenderService.getAllRenderer(Renderer);
     }
-
+    @GetMapping("/saveAll/{ViewPortHeight}")
+    public String getAllByViewPortHeight(Integer ViewPortHeight){
+        return  samplerenderRepository.saveAllByViewPortHeight(ViewPortHeight);
+    }
 }

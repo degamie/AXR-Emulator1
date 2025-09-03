@@ -7,5 +7,6 @@ public interface SampleRendererRepository extends JpaRepository<SampleRenderer,S
     @Autowired
     public SampleRenderer samplerender;
     public String getRenderer(int Renderer);
+    public String saveAllByViewPortHeight(Integer ViewPortHeight);
 
 }
