@@ -8,5 +8,6 @@ public interface IndexBufferRepository extends JpaRepository<IndexBuffer,String>
     public String saveAllByBufferSize(Integer bufferSize);
     public String findAllByBufferSize(Integer bufferSize);//Finding BufferSize
     public String saveAllByIndexNumber(String BufferNumber);
+    public String findAllByIndexNumber(String BufferNumber);//BufferNumber's Finding In IndexBuffer
 
 }
