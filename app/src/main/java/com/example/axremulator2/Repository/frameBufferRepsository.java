@@ -18,6 +18,7 @@ public class frameBufferRepository extends JpaRepository<VirtualSceneFrameBuffer
     public String getframeBufferId(Long FrameBufferId);
     public String saveAllframeBufferName(String frameBufferName);
     public String findAllByFrameBufferName(String frameBufferName);
+    public String findAllByColorTexture(String ColorTexture);
 }
 //DepthTexture=new Texture(
 //                    SampleRenderer renderer,
