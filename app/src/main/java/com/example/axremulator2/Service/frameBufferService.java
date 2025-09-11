@@ -19,6 +19,9 @@ public class frameBufferService {
     public String setAllByFrameBufferName(String frameBufferName){
            return frameBufferrepository.findAllByFrameBufferName(frameBufferName);
     }
+    public String setAllByColorTexture(String ColorTexture){//Binding Color Texture
+        return frameBufferrepository.findAllByColorTexture(ColorTexture);
+    }
 
 }
 //DepthTexture=new Texture(
