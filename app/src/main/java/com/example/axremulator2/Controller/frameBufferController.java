@@ -20,6 +20,10 @@ public class FrameBufferController {
     public String setAllBufferName(String BufferName){
         return frameBufferService.setAllframeBufferName(BufferName)
     }
+    @PostMapping("/findAll/ColorTexture")//Retriving ColorTexture in Server
+    public String setAllBuColorTexture(String ColorTexture){
+        return frameBufferService.setAllColorTexture(ColorTexture)
+    }
 
 }
 //DepthTexture=new Texture(
