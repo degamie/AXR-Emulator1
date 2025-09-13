@@ -19,6 +19,10 @@ public class SampleRendererController{
     public String getAllByBufferId(String BufferId){
         return  samplerenderRepository.saveAllByBufferId(BufferId);
     }
+    @PostMappping("/saveAll/{ViewPortWidth}")//Retrieving  ViewPortWidth in Server
 
+    public String setAllByViewPortWidth(Integer ViewPortWidth){
+         return samplerenderService.setAllByViewPortWidth(ViewPortWidth);
+    }
 
 }
