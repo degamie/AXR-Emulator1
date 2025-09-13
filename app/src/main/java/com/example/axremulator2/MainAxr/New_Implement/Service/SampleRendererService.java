@@ -16,5 +16,8 @@ public class SampleRendererService {
     public String getAllByBufferId(String BufferId){
        return  samplerenderRepository.saveAllByBufferId(BufferId);
     }
+    public String setAllByViewPortWidth(Integer ViewPortWidth){
+       return samplerenderRepository.findAllByViewPortWidth(ViewPortWidth);
+    }
 
 }
