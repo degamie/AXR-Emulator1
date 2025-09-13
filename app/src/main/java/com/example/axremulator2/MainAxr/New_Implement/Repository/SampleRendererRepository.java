@@ -8,6 +8,8 @@ public interface SampleRendererRepository extends JpaRepository<SampleRenderer,S
     public SampleRenderer samplerender;
     public String getRenderer(int Renderer);
     public String saveAllByViewPortHeight(Integer ViewPortHeight);
+    public String findAllByViewPortWidth(Integer ViewPortWidth);
 
      public String saveAllByBufferId(String BufferId);
+     public String findAllByBufferId(String BufferId);
 }
