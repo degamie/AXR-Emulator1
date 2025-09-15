@@ -1,0 +1,1 @@
+const xrCam=new WebXRCamera("Camera1",scene,xrSessionManager);
