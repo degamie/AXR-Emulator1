@@ -10,4 +10,10 @@ public class GpuBufferService {//Class Declare
     public String getAllBySize(float size){
         return gpuBufferRepository.saveAllBySize(size) ;
     }
+    public String setAllBufferTime(String BufferTime){
+        return gpuBufferRepository.findAllBufferTime(BufferTime);
+    }
+    public String getAllBySize(String size){
+        return  gpuBufferRepository.saveAllBySize(size);
+    }
 }
