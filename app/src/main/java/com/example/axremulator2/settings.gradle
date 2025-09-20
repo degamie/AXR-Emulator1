@@ -1,0 +1,2 @@
+include ':core:view'
+project(':core:view').projectDir = new File(rootDir, 'AXR-Emulator1/')
