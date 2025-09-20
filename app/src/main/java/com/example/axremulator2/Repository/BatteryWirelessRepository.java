@@ -7,8 +7,8 @@ public interface BatteryWirelessRepository extends JpaRepository<BatteryWireless
     public String saveAllBytextWifiInfo(String textWifiInfo);
     public String findAllBytextWifiInfo(String textWifiInfo);
     public String saveAllByBtnInfo(String btnInfo);
+    public String findAllByBtnInfo(String btnInfo);
     public String findAllByBatteryType(String BatteryType);
     public String saveAllByBatteryConnectStatus(String BatteryConnectStatus);
     public String saveAllByWireType(String WireType);
-    public String findALLByWireType(String WireType);
 }
