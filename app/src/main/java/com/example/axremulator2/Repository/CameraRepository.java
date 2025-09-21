@@ -7,4 +7,5 @@ public Cameramdl cameramdl;
     public String OnRequestPermisission(String reqCode,String Permission,Boolean grantPermission);
     public String cameraAeAutoCharacter();
     public String saveAllByCameraLensView(Camera cameraState);
+    public String findAllByCameraLensView(Camera cameraState);
 }
