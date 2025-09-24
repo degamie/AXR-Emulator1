@@ -1,5 +1,7 @@
 package com.example.axremulator2.MainAxr.New_Implement.Service;
 
+import android.net.ConnectivityManager;
+
 @Controller
 public class BatteryReciverController {//Controller Class Declare
     @Autowired
@@ -13,5 +15,11 @@ public class BatteryReciverController {//Controller Class Declare
         public String setAllByNetworkInfo(String networkInfo){// NetworkInfo's Retreival
         return batteryRecieverService.setAllByNetworkInfo(networkInfo);
     }
+    @GetMapping("/saveAll/{ConnectivityManager}")
+    public String getAllConnectivityManager(ConnectivityManager connectivityManager){
+        return  batteryRecieverRepository.saveAllConnectivityManager(connectivityManager);
+    }
+
+
 
 }
