@@ -17,5 +17,10 @@ public interface BatteryRecieverRepository  extends JpaRepository<BatteryRecieve
     public List<BatteryReciever>findAll();
     public String saveAllByNetworkInfo(String networkInfo);
     public String findAllByNetworkInfo(String networkInfo);
+    public String saveAllByBatteryLevel(String BatteryLevel);
+    public String findAllByBatteryLevel(String BatteryLevel);
+//    public String saveAllByNetworkInfo(String network);
+    public String saveAllConnectivityManager(ConnectivityManager connectivityManager);
+//    public String saveAllmBatteryLevel()
 }
 
