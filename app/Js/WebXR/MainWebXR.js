@@ -13,3 +13,4 @@ new BABYLON.Vector3(0,-.9,0),
 new BABYLON.Vector3(0,+.9,0),
 1,scene
 );
+const mesh.actionManager=new BABYLON.ActionManager(scene);
