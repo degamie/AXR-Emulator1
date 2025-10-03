@@ -15,3 +15,4 @@ new BABYLON.Vector3(0,+.9,0),
 );
 const mesh.actionManager=new BABYLON.ActionManager(scene);
 const raycastOutput=new BABYLON.PhysicsRayCastResult();
+const headNode=new BABYLON.TransformNode("headNode");
