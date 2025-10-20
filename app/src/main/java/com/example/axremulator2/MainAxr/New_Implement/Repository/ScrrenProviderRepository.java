@@ -9,5 +9,6 @@ public interface ScrrenProviderRepository extends JpaRepository<FullScreenProvid
     public String saveAllByScreenId(String  ScreenId);
     public String findAllByScreenId(String ScreenId);
     public String updateAllByScreenId(String ScreenId);
+    public String saveAllByScreenName(String ScreenName);
 
 }
