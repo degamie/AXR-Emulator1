@@ -6,7 +6,6 @@ import com.example.axremulator2.MainAxr.New_Implement.Repository.ScrrenProviderR
 public class ScrrenProviderService{
     @Autowired
     public ScrrenProviderRepository scrrenProviderRepository;
-    public String getAllByScreenName(String ScreenName){return scrrenProviderRepository.saveAllByScreenName(ScreenName);}//Fetching ScreenName
     public String setAllByScreenId(String ScreenId){//Binding ScreenId
         return scrrenProviderRepository.findAllByScreenId(ScreenId);
     }
