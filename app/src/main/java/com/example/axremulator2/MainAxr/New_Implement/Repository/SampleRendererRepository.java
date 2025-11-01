@@ -6,6 +6,7 @@ import com.example.axremulator2.Common.helpers.SampleRenderer;
 public interface SampleRendererRepository extends JpaRepository<SampleRenderer,String >{
     @Autowired
     public SampleRenderer samplerender;
+     public String saveAllByViewPortWidth(Integer ViewPortWidth);//Fetching ViewPort Witdth in SampleRenderer
     public String getRenderer(int Renderer);
     public String saveAllByViewPortHeight(Integer ViewPortHeight);
     public String findAllByViewPortWidth(Integer ViewPortWidth);
