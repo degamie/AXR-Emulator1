@@ -5,5 +5,8 @@ public interface ScrrenProviderRepository extends JpaRepository<ScrrenProvider,S
     @Autowired
      public ScrrenProvider screenprovider;
     public String saveAllByScreenId(String  ScreenId);
+    public String findAllByScreenId(String ScreenId);
+    public String saveAllByScreenName(String ScreenName);
+    public void findAllByScreenName(String ScreenName);
 
 }
