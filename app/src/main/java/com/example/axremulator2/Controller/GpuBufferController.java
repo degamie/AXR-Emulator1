@@ -19,6 +19,9 @@ public class GpuBufferController {//Class Declare
     public String getAllBySize(String size){//size's Retrieval In Server
         return  gpuBufferRepository.saveAllBySize(size);
     }
+    @GetMapping("/saveAll/{gpuRenderer}")
+    public String saveAllgpuRenderer(String gpuRenderer){return gpuBufferRepository.saveAllgpuRenderer(gpuRenderer);}
+
 
 }
 //    public GpuBuffer(GpuBuffer gpubuffer){
