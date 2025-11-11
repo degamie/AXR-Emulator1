@@ -16,4 +16,5 @@ public class GpuBufferService {//Class Declare
     public String getAllBySize(String size){
         return  gpuBufferRepository.saveAllBySize(size);
     }
+    public String saveAllgpuRenderer(String gpuRenderer){return gpuBufferRepository.saveAllgpuRenderer(gpuRenderer);}
 }
