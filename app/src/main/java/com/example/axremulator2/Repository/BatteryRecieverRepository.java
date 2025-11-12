@@ -11,15 +11,14 @@ import java.util.List;
 
 @Repository
 
-public interface BatteryRecieverRepository  extends JpaRepository<BatteryReciever,String> {//BatteryReciever class inherititing BroadCastReciever
-
+public interface BatteryRecieverRepository  extends JpaRepository<BatteryReciever,String> {//BatteryReciever class inherititing BroadCastRecieve
     public List<BatteryReciever> saveAll();
     public List<BatteryReciever>findAll();
+    public String findAllByContext(Context context);
     public String saveAllByNetworkInfo(String networkInfo);
     public String findAllByNetworkInfo(String networkInfo);
     public String saveAllByBatteryLevel(String BatteryLevel);
-    public String saveAllByNetworkInfo(String network);
-    public String saveAllConnectivityManager(ConnectivityManager connectivityManager);
-//    public String saveAllmBatteryLevel()
+    public String saveAllmBatteryLevel();
+    public String saveAllByTextViewInfo(TextView textView);
 }
 
