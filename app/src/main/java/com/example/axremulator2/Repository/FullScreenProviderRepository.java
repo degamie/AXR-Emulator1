@@ -3,4 +3,5 @@ public interface FullScreenProviderRepository extends JpaRepository<FullScreenPr
     public String findAllByScreenId(String ScreenId);
     public String saveAllByScreenId(String ScreenId);
     public String saveallByScreenName(String ScreenName);
+    public void findAllByScreenName(String ScreenName);
 }
