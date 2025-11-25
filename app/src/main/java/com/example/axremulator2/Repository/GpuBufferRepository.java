@@ -5,7 +5,7 @@ package com.example.axremulator2.MainAxr.New_Implement.Repository;
 //@AllParamsConstructor
 //@NoParamsConstructor
 
-//WID(13/11/2025)//Sarthak Mittal aka (Degamiesign)
+//WID(25/11/2025)//Sarthak Mittal aka (Degamiesign)
 import com.example.axremulator2.MainAxr.New_Implement.ModelSelector.GpuBuffer;
 @Repository
 public interface GpuBufferRepository extends JpaRepository<GpuBuffer,String> {//Interface Declare with Inherited Class
@@ -18,6 +18,7 @@ public interface GpuBufferRepository extends JpaRepository<GpuBuffer,String> {//
     public String saveAllBufferTime(String BufferTime);//Fetching BufferTime
      public String saveAllgpuRenderer(String gpuRenderer);
      public void findAllgpuRenderer(String gpuRenderer);//Retreiving gpuRenderer in Server
+    public String updateAllBygpuRenderer(String gpuRenderer);//updating GpuBuffer in Server
 }
 //    public String saveAllBySize(String size);
 
