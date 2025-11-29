@@ -16,6 +16,8 @@ public interface GpuBufferRepository extends JpaRepository<GpuBuffer,String> {//
     public String updateAllByBufferSize(float Size);
     public String findAllBufferTime(String BufferTime);
     public String saveAllBufferTime(String BufferTime);//Fetching BufferTime
+    public String updateAllByBufferTime(String Buffertime);//Updating Buffertime in App
+
      public String saveAllgpuRenderer(String gpuRenderer);
      public void findAllgpuRenderer(String gpuRenderer);//Retreiving gpuRenderer in Server
     public String updateAllBygpuRenderer(String gpuRenderer);//updating GpuBuffer in Server
