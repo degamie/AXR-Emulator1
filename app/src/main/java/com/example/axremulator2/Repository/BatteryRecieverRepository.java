@@ -9,21 +9,18 @@ import com.example.wirelesschargingapplication.axr.AXR_Application.app.src.main.
 
 import java.util.List;
 
+//WID(26/12/2025)
 @Repository
-//WID(12/12/2025)( Sarthak Mittal(AKADegamieign))
 
-public interface BatteryRecieverRepository  extends JpaRepository<BatteryReciever,String> {//BatteryReciever class inherititing BroadCastReciever
-    public String findAllByBatteryLevel(String BatteryLevel);
+public interface BatteryRecieverRepository  extends JpaRepository<BatteryReciever,String> {//BatteryReciever class inherititing BroadCastRecieve
     public List<BatteryReciever> saveAll();
     public List<BatteryReciever>findAll();
+    public String findAllByContext(Context context);
     public String saveAllByNetworkInfo(String networkInfo);
     public String findAllByNetworkInfo(String networkInfo);
     public String saveAllByBatteryLevel(String BatteryLevel);
-
-//    public String saveAllByNetworkInfo(String network);
-    public String saveAllConnectivityManager(ConnectivityManager connectivityManager);
-    public String findAllByConnectivityManager(ConnnectivityManager connectivityManager);
-    public List<BatteryReciever> updateByConnectivityManager(ConnnectivityManager connectivityManager);//Updating By Connectivity Manager
-//    public String saveAllmBatteryLevel()
+    public String saveAllmBatteryLevel();
+    public String saveAllByTextViewInfo(TextView textView);
+    public void findBybatterylevel(String mBatterylevel);
 }
 
