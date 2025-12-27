@@ -5,4 +5,5 @@ public interface VirtualFrameSceneBufferRepository extends JpaRepository<Virtual
     public String saveAllByFrameBufferId(String FrameBufferId);
     public String findAllByFrameBufferId(String FrameBufferId);
     public String saveAllByBufferName(String FrameBufferName);
+    public void findByBufferName(String frameBufferName);
 }
